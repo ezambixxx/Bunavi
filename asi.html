@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edukasi ASI - BUNAVI</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="asi.css" />
+    <script src="script.js"></script>
+    
+</head>
+<body>
+    <nav class="navbar loading">
+    <div class="logo">BUNAVI</div>
+    <ul class="nav-links">
+        <!-- Beranda -->
+        <li class="nav-item">
+            <a href="Perawatan_bayi.html" class="active">Menu Sebelumnya</a>
+        </li>
+    </nav>
+    <div class="main-container">
+        <div class="page-title">
+            <h1>Edukasi ASI Eksklusif</h1>
+            <p>Pelajari segala hal tentang ASI untuk kesehatan optimal si kecil</p>
+        </div>
+
+        <div class="content-tabs">
+            <button class="tab-btn active" onclick="showTab('manfaat')">Manfaat ASI</button>
+            <button class="tab-btn" onclick="showTab('panduan')">Panduan Menyusui</button>
+            <button class="tab-btn" onclick="showTab('perbandingan')">ASI vs Sufor</button>
+            <button class="tab-btn" onclick="showTab('mitos')">Mitos & Fakta</button>
+        </div>
+
+        <!-- Tab Manfaat ASI -->
+        <div id="manfaat" class="tab-content active">
+            <div class="interactive-section">
+                <div class="section-header">
+                    <div class="section-icon">🍼</div>
+                    <div>
+                        <h2>Manfaat ASI untuk Bayi</h2>
+                        <p>Klik pada setiap manfaat untuk mempelajari lebih detail</p>
+                    </div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item" onclick="toggleContent(this)">
+                        <div class="timeline-age">0-6 Bulan</div>
+                        <h3>🛡️ Perlindungan Imunitas</h3>
+                        <p>ASI mengandung antibodi yang melindungi bayi dari infeksi</p>
+                        <div class="hidden-content">
+                            <p><strong>Detail:</strong> ASI mengandung immunoglobulin A (IgA) yang membentuk lapisan pelindung di usus, tenggorokan, dan paru-paru bayi. Kolostrum (ASI pertama) sangat kaya akan antibodi dan sel darah putih.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" onclick="toggleContent(this)">
+                        <div class="timeline-age">0-2 Tahun</div>
+                        <h3>🧠 Perkembangan Otak</h3>
+                        <p>DHA dan ARA dalam ASI mendukung perkembangan otak optimal</p>
+                        <div class="hidden-content">
+                            <p><strong>Detail:</strong> ASI mengandung asam lemak esensial seperti DHA dan ARA yang krusial untuk perkembangan sistem saraf dan fungsi kognitif. Penelitian menunjukkan anak yang mendapat ASI eksklusif memiliki IQ lebih tinggi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" onclick="toggleContent(this)">
+                        <div class="timeline-age">Seumur Hidup</div>
+                        <h3>❤️ Kesehatan Jangka Panjang</h3>
+                        <p>Mengurangi risiko obesitas, diabetes, dan penyakit jantung</p>
+                        <div class="hidden-content">
+                            <p><strong>Detail:</strong> ASI membantu mengatur metabolisme dan memberikan perlindungan jangka panjang terhadap penyakit kronis. Bayi yang mendapat ASI memiliki risiko lebih rendah terkena asma, alergi, dan penyakit autoimun.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    
+        <div class="interactive-quiz fade-in" id="asiQuiz">
+            <div class="quiz-header">
+                <h2>🧠 Kuis Interaktif ASI</h2>
+                <p>Uji pengetahuanmu tentang ASI eksklusif</p>
+            </div>
+            <div class="quiz-question active" id="asi-question-container">
+                <!-- Soal akan dimuat dengan JavaScript -->
+            </div>
+        </div>
+        </div>
+        
+              <!-- Tab Panduan Menyusui -->
+        <div id="panduan" class="tab-content">
+            <div class="interactive-section">
+                <div class="section-header">
+                    <div class="section-icon">📋</div>
+                    <div>
+                        <h2>Panduan Langkah Menyusui</h2>
+                        <p>Ikuti panduan step-by-step untuk menyusui yang benar</p>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%" id="panduan-progress"></div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item" onclick="markStepComplete(this, 0)">
+                        <h3>1️⃣ Persiapan</h3>
+                        <p>Cuci tangan, cari posisi nyaman, dan siapkan mental</p>
+                        <div class="hidden-content">
+                            <p><strong>Tips:</strong> Pilih kursi yang nyaman dengan sandaran yang baik. Siapkan bantal untuk menopang bayi dan air minum untuk ibu.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" onclick="markStepComplete(this, 1)">
+                        <h3>2️⃣ Posisi Bayi</h3>
+                        <p>Peluk bayi dengan posisi perut menghadap perut ibu</p>
+                        <div class="hidden-content">
+                            <p><strong>Posisi yang benar:</strong> Kepala bayi sejajar dengan payudara, hidung bayi menghadap puting, tubuh bayi lurus dari kepala hingga kaki.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" onclick="markStepComplete(this, 2)">
+                        <h3>3️⃣ Perlekatan (Latch)</h3>
+                        <p>Pastikan bayi mengisap areola, bukan hanya puting</p>
+                        <div class="hidden-content">
+                            <p><strong>Tanda perlekatan baik:</strong> Mulut bayi terbuka lebar, bibir bawah terlipat keluar, tidak ada bunyi 'klik', dan ibu tidak merasa sakit.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" onclick="markStepComplete(this, 3)">
+                        <h3>4️⃣ Proses Menyusui</h3>
+                        <p>Biarkan bayi menyusu hingga kenyang dan melepas sendiri</p>
+                        <div class="hidden-content">
+                            <p><strong>Durasi:</strong> Biasanya 10-30 menit per payudara. Jangan membatasi waktu, biarkan bayi yang menentukan kapan selesai.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Perbandingan ASI vs Sufor -->
+        <div id="perbandingan" class="tab-content">
+            <div class="interactive-section">
+                <div class="section-header">
+                    <div class="section-icon">⚖️</div>
+                    <div>
+                        <h2>Perbandingan ASI vs Susu Formula</h2>
+                        <p>Klik pada masing-masing kartu untuk mempelajari perbedaannya</p>
+                    </div>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card asi" onclick="showComparison('asi')">
+                        <div class="card-icon">🤱</div>
+                        <h3>ASI Eksklusif</h3>
+                        <p>Makanan terbaik untuk bayi 0-6 bulan</p>
+                        <div class="hidden-content">
+                            <h4>Keunggulan ASI:</h4>
+                            <p>• Komposisi nutrisi yang sempurna</p>
+                            <p>• Mengandung antibodi alami</p>
+                            <p>• Mudah dicerna</p>
+                            <p>• Selalu steril dan suhu tepat</p>
+                            <p>• Gratis dan praktis</p>
+                            <p>• Menguatkan bonding ibu-bayi</p>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-card sufor" onclick="showComparison('sufor')">
+                        <div class="card-icon">🍼</div>
+                        <h3>Susu Formula</h3>
+                        <p>Alternatif ketika ASI tidak memungkinkan</p>
+                        <div class="hidden-content">
+                            <h4>Tentang Susu Formula:</h4>
+                            <p>• Dibuat menyerupai komposisi ASI</p>
+                            <p>• Tidak mengandung antibodi</p>
+                            <p>• Membutuhkan persiapan steril</p>
+                            <p>• Lebih mahal dari ASI</p>
+                            <p>• Risiko kontaminasi lebih tinggi</p>
+                            <p>• Dapat menyebabkan alergi</p>
+                        </div>
+                    </div>
+                </div>
+          
+                                     
+        <div class="interactive-quiz fade-in" id="suforQuestions">
+            <div class="quiz-header">
+                <h2>🧠 Kuis Interaktif ASI vs Sufor</h2>
+                <p>Uji pengetahuanmu tentang ASI vs Sufor</p>
+            </div>
+            <div id="sufor-quiz-container" class="sufor-quiz-container"></div>
+
+                <!-- Soal akan dimuat dengan JavaScript -->
+            </div>
+        </div>
+        </div>
+
+        <!-- Tab Mitos & Fakta -->
+        <div id="mitos" class="tab-content">
+            <div class="interactive-section">
+                <div class="section-header">
+                    <div class="section-icon">🔍</div>
+                    <div>
+                        <h2>Mitos & Fakta Seputar ASI</h2>
+                        <p>Klik pada setiap item untuk mengungkap fakta yang benar</p>
+                    </div>
+                </div>
+
+                <div class="myth-fact-container">
+                    <div class="myth-fact-item" onclick="revealFact(this)">
+                        <div class="myth-label">MITOS</div>
+                        <h3>ASI encer berarti tidak bernutrisi</h3>
+                        <div class="hidden-content">
+                            <div class="fact-label">FAKTA</div>
+                            <p><strong>SALAH!</strong> ASI yang tampak encer di awal menyusui (foremilk) mengandung banyak air dan laktosa untuk menghilangkan dahaga bayi. ASI yang keluar kemudian (hindmilk) lebih kental dan kaya lemak.</p>
+                        </div>
+                    </div>
+
+                    <div class="myth-fact-item" onclick="revealFact(this)">
+                        <div class="myth-label">MITOS</div>
+                        <h3>Ibu yang sakit tidak boleh menyusui</h3>
+                        <div class="hidden-content">
+                            <div class="fact-label">FAKTA</div>
+                            <p><strong>SALAH!</strong> Justru ketika ibu sakit, tubuhnya membentuk antibodi yang akan diteruskan ke bayi melalui ASI, memberikan perlindungan ekstra untuk si kecil.</p>
+                        </div>
+                    </div>
+
+                    <div class="myth-fact-item" onclick="revealFact(this)">
+                        <div class="myth-label">MITOS</div>
+                        <h3>Bayi perlu air putih selain ASI</h3>
+                        <div class="hidden-content">
+                            <div class="fact-label">FAKTA</div>
+                            <p><strong>SALAH!</strong> ASI sudah mengandung 87% air dan semua nutrisi yang dibutuhkan bayi 0-6 bulan. Memberikan air putih justru dapat mengurangi asupan ASI dan berisiko diare.</p>
+                        </div>
+                    </div>
+
+                    <div class="myth-fact-item" onclick="revealFact(this)">
+                        <div class="myth-label">MITOS</div>
+                        <h3>ASI tidak cukup untuk bayi yang besar</h3>
+                        <div class="hidden-content">
+                            <div class="fact-label">FAKTA</div>
+                            <p><strong>SALAH!</strong> Komposisi ASI menyesuaikan dengan kebutuhan bayi. Semakin sering bayi menyusu, semakin banyak ASI yang diproduksi (prinsip supply-demand).</p>
+                        </div>
+                    </div>
+
+                    <div class="myth-fact-item" onclick="revealFact(this)">
+                        <div class="myth-label">MITOS</div>
+                        <h3>Ibu dengan payudara kecil tidak bisa menyusui</h3>
+                        <div class="hidden-content">
+                            <div class="fact-label">FAKTA</div>
+                            <p><strong>SALAH!</strong> Ukuran payudara tidak menentukan kemampuan produksi ASI. Yang penting adalah jaringan kelenjar susu, bukan ukuran payudara.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="interactive-btn" onclick="resetAllMyths()">🔄 Reset Semua Mitos</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let panduanSteps = [false, false, false, false];
+        
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            if (tabName === 'perbandingan') {
+            renderSuforQuestion(); // ✅ Benar
+    }
+
+        }
+
+        function toggleContent(element) {
+            const hiddenContent = element.querySelector('.hidden-content');
+            if (hiddenContent.style.display === 'block') {
+                hiddenContent.style.display = 'none';
+                element.style.transform = 'translateX(0)';
+            } else {
+                hiddenContent.style.display = 'block';
+                element.style.transform = 'translateX(10px)';
+            }
+        }
+
+        function selectAnswer(element, selectedIndex, correctIndex) {
+            const container = element.parentElement;
+            const options = container.querySelectorAll('.quiz-option');
+            
+            // Reset all options
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Mark selected answer
+            element.classList.add('selected');
+            
+            // Show correct/incorrect after 1 second
+            setTimeout(() => {
+                options.forEach((option, index) => {
+                    if (index === correctIndex) {
+                        option.classList.add('correct');
+                    } else if (option.classList.contains('selected') && index !== correctIndex) {
+                        option.classList.add('incorrect');
+                    }
+                });
+            }, 1000);
+        }
+
+        function markStepComplete(element, stepIndex) {
+            panduanSteps[stepIndex] = !panduanSteps[stepIndex];
+            
+            if (panduanSteps[stepIndex]) {
+                element.style.background = 'linear-gradient(135deg, #E8F5E8, #C8E6C9)';
+                element.style.borderLeft = '5px solid #4CAF50';
+            } else {
+                element.style.background = 'white';
+                element.style.borderLeft = 'none';
+            }
+            
+            // Update progress bar
+            const completedSteps = panduanSteps.filter(step => step).length;
+            const progressPercentage = (completedSteps / panduanSteps.length) * 100;
+            document.getElementById('panduan-progress').style.width = progressPercentage + '%';
+            
+            toggleContent(element);
+        }
+
+        function showComparison(type) {
+            const cards = document.querySelectorAll('.comparison-card');
+            cards.forEach(card => {
+                const hiddenContent = card.querySelector('.hidden-content');
+                if (card.classList.contains(type)) {
+                    hiddenContent.style.display = hiddenContent.style.display === 'block' ? 'none' : 'block';
+                } else {
+                    hiddenContent.style.display = 'none';
+                }
+            });
+        }
+
+        function revealFact(element) {
+            const hiddenContent = element.querySelector('.hidden-content');
+            if (hiddenContent.style.display === 'block') {
+                hiddenContent.style.display = 'none';
+                element.classList.remove('revealed');
+            } else {
+                hiddenContent.style.display = 'block';
+                element.classList.add('revealed');
+            }
+        }
+
+        function resetAllMyths() {
+            document.querySelectorAll('.myth-fact-item').forEach(item => {
+                item.querySelector('.hidden-content').style.display = 'none';
+                item.classList.remove('revealed');
+            });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add some entrance animations
+            const sections = document.querySelectorAll('.interactive-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

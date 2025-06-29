@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Kebersihan dan Mandi - BUNAVI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #E8F4FD 0%, #B8E6FF 100%);
+            min-height: 100vh;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #2c5f2d, #4a90a4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        logo:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            overflow: visible !important;
+        }
+
+        .navbar:hover {
+            box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            position: relative;
+            overflow: visible !important;
+        }
+
+        /* Button Beranda dan Materi */
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-left: -6px;
+            display: inline-block;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #4a90a4;
+            background: linear-gradient(135deg, rgba(74, 144, 164, 0.1), rgba(76, 175, 80, 0.1));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 164, 0.2);
+        }
+
+        .nav-links a.active {
+            color: white;
+            background: linear-gradient(135deg, #4a90a4, #4CAF50);
+            box-shadow: 0 5px 15px rgba(74, 144, 164, 0.3);
+        }
+
+        .nav-item:hover {
+            color: #2C5282;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+         .intro-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .intro-section h2 {
+            color: #2c5282;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: #2C5282;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #4A5568;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            background: white;
+            height: 8px;
+            border-radius: 20px;
+            margin: 2rem 0;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4299E1, #63B3ED);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 20px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .education-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #4299E1, #63B3ED);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            animation: bounce 2s infinite;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #2C5282;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .card-content {
+            color: #4A5568;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .interactive-demo {
+            background: linear-gradient(135deg, #F7FAFC, #EDF2F7);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-demo:hover {
+            background: linear-gradient(135deg, #EDF2F7, #E2E8F0);
+        }
+
+        .demo-button {
+            background: linear-gradient(135deg, #4299E1, #63B3ED);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 153, 225, 0.4);
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #4A5568;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background: linear-gradient(135deg, #4299E1, #63B3ED);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .quiz-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            color: #2C5282;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-option {
+            background: #F7FAFC;
+            border: 2px solid #E2E8F0;
+            border-radius: 15px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .quiz-option:hover {
+            background: #EDF2F7;
+            border-color: #4299E1;
+        }
+
+        .quiz-option.correct {
+            background: #C6F6D5;
+            border-color: #38A169;
+            color: #22543D;
+        }
+
+        .quiz-option.incorrect {
+            background: #FED7D7;
+            border-color: #E53E3E;
+            color: #742A2A;
+        }
+
+        .floating-tips {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 250px;
+            z-index: 50;
+        }
+
+        .tip-title {
+            color: #2C5282;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-content {
+            color: #4A5568;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 20px;
+            position: relative;
+            animation: slideDown 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #4A5568;
+            z-index: 10;
+        }
+
+        .checklist {
+            background: #F7FAFC;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .checklist-item:hover {
+            border-color: #4299E1;
+            transform: translateX(5px);
+        }
+
+        .checklist-item.checked {
+            background: #C6F6D5;
+            border-color: #38A169;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #E2E8F0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox.checked {
+            background: #38A169;
+            border-color: #38A169;
+        }
+
+        .temperature-slider {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .slider-container {
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .temperature-range {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #3182CE 0%, #38A169 37%, #38A169 38%, #E53E3E 100%);
+            outline: none;
+            appearance: none;
+        }
+
+        .temperature-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2C5282;
+            margin: 1rem 0;
+        }
+
+        .temp-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .temp-cold { background: #BEE3F8; color: #2A69AC; }
+        .temp-perfect { background: #C6F6D5; color: #22543D; }
+        .temp-hot { background: #FED7D7; color: #742A2A; }
+
+        .step-tutorial {
+            margin: 2rem 0;
+        }
+
+        .tutorial-step {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: #F7FAFC;
+            border-radius: 15px;
+            margin: 1rem 0;
+        }
+
+        .tutorial-step.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .tutorial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            background: #4299E1;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #3182CE;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #CBD5E0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #4299E1;
+        }
+
+        .product-card.safe {
+            border-color: #38A169;
+            background: #F0FFF4;
+        }
+
+        .product-card.avoid {
+            border-color: #E53E3E;
+            background: #FFF5F5;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .schedule-card {
+            background: linear-gradient(135deg, #4299E1, #63B3ED);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .hero-title { font-size: 2rem; }
+            .content-grid { grid-template-columns: 1fr; }
+            .floating-tips { display: none; }
+            .modal-content { width: 95%; margin: 5% auto; }
+            .product-grid { grid-template-columns: 1fr; }
+            .schedule-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar loading">
+    <div class="logo">BUNAVI</div>
+    <ul class="nav-links">
+        <!-- Beranda -->
+        <li class="nav-item">
+            <a href="Perawatan_bayi.html" class="active">Menu Sebelumnya</a>
+        </li>
+    </nav>
+
+    <div class="container">
+    <section class="hero-section">
+    <div class="intro-section">
+        <h2 class="hero-title">Kebersihan & Mandi Bayi</h2>
+        <p class="hero-subtitle">Pelajari cara menjaga kebersihan si kecil dengan aman dan menyenangkan</p>
+    </div>
+    </section>
+
+    <div class="content-grid">
+            <div class="education-card" onclick="openModal('persiapanModal')" style="animation-delay: 0.1s">
+                <div class="card-icon">🧼</div>
+                <h3 class="card-title">Persiapan Mandi</h3>
+                <p class="card-content">Langkah persiapan sebelum memandikan bayi yang aman dan nyaman</p>
+                <div class="interactive-demo">
+                    <button class="demo-button">Lihat Tutorial</button>
+                </div>
+            </div>
+
+            <div class="education-card" onclick="openModal('teknikModal')" style="animation-delay: 0.2s">
+                <div class="card-icon">👶</div>
+                <h3 class="card-title">Teknik Memandikan</h3>
+                <p class="card-content">Cara yang benar memegang dan memandikan bayi dengan aman</p>
+                <div class="interactive-demo">
+                    <button class="demo-button">Pelajari Teknik</button>
+                </div>
+            </div>
+
+            <div class="education-card" onclick="openModal('produkModal')" style="animation-delay: 0.3s">
+                <div class="card-icon">🧴</div>
+                <h3 class="card-title">Produk yang Aman</h3>
+                <p class="card-content">Memilih sabun, shampo, dan produk perawatan yang tepat untuk bayi</p>
+                <div class="interactive-demo">
+                    <button class="demo-button">Panduan Produk</button>
+                </div>
+            </div>
+
+            <div class="education-card" onclick="openModal('frekuensiModal')" style="animation-delay: 0.4s">
+                <div class="card-icon">📅</div>
+                <h3 class="card-title">Frekuensi & Waktu</h3>
+                <p class="card-content">Seberapa sering dan waktu yang tepat untuk memandikan bayi</p>
+                <div class="interactive-demo">
+                    <button class="demo-button">Jadwal Mandi</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-section">
+            <h3 class="quiz-question">🤔 Quiz: Suhu air yang ideal untuk mandi bayi adalah?</h3>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="selectQuizOption(this, false)">35-36°C</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, true)">37-38°C</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false)">39-40°C</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false)">41-42°C</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-tips">
+        <div class="tip-title">💡 Tips Hari Ini</div>
+        <div class="tip-content" id="floatingTip">Selalu periksa suhu air dengan siku Anda sebelum memandikan bayi. Siku lebih sensitif daripada tangan!</div>
+    </div>
+</div>
+
+        
+
+    <!-- Modal Persiapan -->
+    <div class="modal" id="persiapanModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('persiapanModal')">&times;</span>
+            <h2 style="color: #2C5282; margin-bottom: 1.5rem; text-align: center;">🧼 Persiapan Mandi Bayi</h2>
+            
+            <div class="temperature-slider">
+                <h3 style="color: #2C5282; margin-bottom: 1rem;">🌡️ Cek Suhu Air Interaktif</h3>
+                <input type="range" min="30" max="45" value="37" class="temperature-range" id="tempSlider">
+                <div class="temperature-display" id="tempDisplay">37°C</div>
+                <div class="temp-status temp-perfect" id="tempStatus">Suhu Sempurna! 👍</div>
+            </div>
+
+            <div class="checklist">
+                <h3 style="color: #2C5282; margin-bottom: 1rem;">📋 Checklist Persiapan</h3>
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checkbox"></div>
+                    <span>🛁 Siapkan bak mandi atau wastafel bersih</span>
+                </div>
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checkbox"></div>
+                    <span>🌡️ Isi air hangat (37-38°C)</span>
+                </div>
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checkbox"></div>
+                    <span>🧴 Siapkan sabun bayi yang lembut</span>
+                </div>
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checkbox"></div>
+                    <span>🧽 Siapkan waslap atau spons lembut</span>
+                </div>
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checkbox"></div>
+                    <span>🏠 Pastikan ruangan hangat (24-26°C)</span>
+                </div>
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checkbox"></div>
+                    <span>🛡️ Siapkan handuk bersih dan lembut</span>
+                </div>
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checkbox"></div>
+                    <span>👕 Siapkan pakaian bersih</span>
+                </div>
+                <div class="checklist-item" onclick="toggleChecklist(this)">
+                    <div class="checkbox"></div>
+                    <span>🧴 Siapkan lotion atau minyak bayi</span>
+                </div>
+            </div>
+
+            <div style="background: #EBF8FF; padding: 1.5rem; border-radius: 15px; margin-top: 2rem;">
+                <h4 style="color: #2C5282; margin-bottom: 1rem;">⚠️ Tips Keamanan</h4>
+                <ul style="color: #4A5568; line-height: 1.6; padding-left: 1.5rem;">
+                    <li>Jangan pernah meninggalkan bayi sendirian dalam air</li>
+                    <li>Pegang bayi dengan kuat dan stabil</li>
+                    <li>Isi air hanya setinggi 5-7 cm</li>
+                    <li>Tutup keran dengan kuat agar tidak menetes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Teknik -->
+    <div class="modal" id="teknikModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('teknikModal')">&times;</span>
+            <h2 style="color: #2C5282; margin-bottom: 1.5rem; text-align: center;">👶 Teknik Memandikan Bayi</h2>
+            
+            <div class="step-tutorial">
+                <div class="tutorial-step active" id="step1">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🤱</div>
+                    <h3 style="color: #2C5282; margin-bottom: 1rem;">Langkah 1: Posisi Memegang</h3>
+                    <p style="color: #4A5568; line-height: 1.6;">
+                        Pegang bayi dengan tangan kiri menopang kepala dan leher. 
+                        Selipkan lengan kiri di bawah ketiak bayi. 
+                        Tangan kanan digunakan untuk mencuci.
+                    </p>
+                </div>
+
+                <div class="tutorial-step" id="step2">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">💧</div>
+                    <h3 style="color: #2C5282; margin-bottom: 1rem;">Langkah 2: Masukkan ke Air</h3>
+                    <p style="color: #4A5568; line-height: 1.6;">
+                        Masukkan bayi perlahan-lahan kaki terlebih dahulu. 
+                        Berikan waktu untuk beradaptasi dengan suhu air. 
+                        Jaga agar air tidak masuk ke telinga.
+                    </p>
+                </div>
+
+                <div class="tutorial-step" id="step3">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🧼</div>
+                    <h3 style="color: #2C5282; margin-bottom: 1rem;">Langkah 3: Urutan Mencuci</h3>
+                    <p style="color: #4A5568; line-height: 1.6;">
+                        Mulai dari wajah, lalu kepala, badan, tangan, dan terakhir kaki. 
+                        Bersihkan area genital dengan lembut dari depan ke belakang. 
+                        Jangan lupa lipatan kulit dan sela-sela jari.
+                    </p>
+                </div>
+
+                <div class="tutorial-step" id="step4">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🏠</div>
+                    <h3 style="color: #2C5282; margin-bottom: 1rem;">Langkah 4: Angkat dan Keringkan</h3>
+                    <p style="color: #4A5568; line-height: 1.6;">
+                        Angkat bayi dengan hati-hati dan langsung bungkus dengan handuk. 
+                        Keringkan dengan cara menepuk lembut, jangan menggosok. 
+                        Berikan kehangatan segera setelah mandi.
+                    </p>
+                </div>
+            </div>
+
+            <div class="tutorial-nav">
+                <button class="nav-btn" onclick="prevStep()" id="prevBtn" disabled>⬅️ Sebelumnya</button>
+                <button class="nav-btn" onclick="nextStep()" id="nextBtn">Selanjutnya ➡️</button>
+            </div>
+               <div style="text-align: center; margin-top: 1rem;">
+                <a href="https://youtu.be/1ukm0tMmC7Q?si=eLd96omkLonqgLL7" target="_blank" rel="noopener noreferrer">
+                    <button class="demo-button" style="background: #E53E3E; margin-top: 1rem;">
+                        ▶️ Lihat Video Tutorial di YouTube
+                    </button>
+                </a>
+            </div>
+
+
+            <div style="background: #FFF5F5; padding: 1.5rem; border-radius: 15px; margin-top: 2rem; border-left: 4px solid #E53E3E;">
+                <h4 style="color: #742A2A; margin-bottom: 1rem;">🚨 Peringatan Penting</h4>
+                <p style="color: #742A2A; line-height: 1.6;">
+                    Jika bayi menangis terus-menerus, kedinginan, atau terlihat tidak nyaman, 
+                    segera angkat dari air dan bungkus dengan handuk hangat.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Produk -->
+    <div class="modal" id="produkModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('produkModal')">&times;</span>
+            <h2 style="color: #2C5282; margin-bottom: 1.5rem; text-align: center;">🧴 Produk yang Aman untuk Bayi</h2>
+            
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: #38A169; margin-bottom: 1rem;">✅ Produk yang Direkomendasikan</h3>
+                <div class="product-grid">
+                    <div class="product-card safe" onclick="showProductInfo('soap')">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧼</div>
+                        <h4>Sabun Bayi</h4>
+                        <p style="font-size: 0.9rem; color: #4A5568;">pH seimbang, bebas parfum</p>
+                    </div>
+                    <div class="product-card safe" onclick="showProductInfo('shampoo')">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧴</div>
+                        <h4>Shampo Bayi</h4>
+                        <p style="font-size: 0.9rem; color: #4A5568;">No tears formula</p>
+                    </div>
+                    <div class="product-card safe" onclick="showProductInfo('lotion')">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧴</div>
+                        <h4>Lotion Bayi</h4>
+                        <p style="font-size: 0.9rem; color: #4A5568;">Hypoallergenic</p>
+                    </div>
+                    <div class="product-card safe" onclick="showProductInfo('oil')">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛢️</div>
+                        <h4>Minyak Bayi</h4>
+                        <p style="font-size: 0.9rem; color: #4A5568;">100% natural</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: #E53E3E; margin-bottom: 1rem;">❌ Produk yang Harus Dihindari</h3>
+                <div class="product-grid">
+                    <div class="product-card avoid">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚫</div>
+                        <h4>Sabun Dewasa</h4>
+                        <p style="font-size: 0.9rem; color: #4A5568;">Terlalu keras untuk kulit bayi</p>
+                    </div>
+                    <div class="product-card avoid">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌸</div>
+                        <h4>Produk Berarfum</h4>
+                        <p style="font-size: 0.9rem; color: #4A5568;">Dapat menyebabkan iritasi</p>
+                    </div>
+                    <div class="product-card avoid">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧪</div>
+                        <h4>Produk Beralkohol</h4>
+                        <p style="font-size: 0.9rem; color: #4A5568;">Membuat kulit kering</p>
+                    </div>
+                    <div class="product-card avoid">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚗️</div>
+                        <h4>Bahan Kimia Keras</h4>
+                        <p style="font-size: 0.9rem; color: #4A5568;">Paraben, sulfat, pewarna</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="productInfo" style="background: #F7FAFC; padding: 1.5rem; border-radius: 15px; margin: 2rem 0; display: none;">
+                <h4 id="productTitle" style="color: #2C5282; margin-bottom: 1rem;"></h4>
+                <p id="productDescription" style="color: #4A5568; line-height: 1.6;"></p>
+                <div id="productTips" style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 10px;"></div>
+            </div>
+
+            <div style="background: #EBF8FF; padding: 1.5rem; border-radius: 15px; margin-top: 2rem;">
+                <h4 style="color: #2C5282; margin-bottom: 1rem;">🔍 Cara Memilih Produk yang Tepat</h4>
+                <ul style="color: #4A5568; line-height: 1.8; padding-left: 1.5rem;">
+                    <li>Pilih produk khusus bayi dengan label "hypoallergenic"</li>
+                    <li>Baca komposisi dan hindari bahan yang keras</li>
+                    <li>Pilih produk dengan pH seimbang (5.5-7.0)</li>
+                    <li>Lakukan patch test sebelum penggunaan pertama</li>
+                    <li>Konsultasi dengan dokter anak jika ragu</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Frekuensi -->
+    <div class="modal" id="frekuensiModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('frekuensiModal')">&times;</span>
+            <h2 style="color: #2C5282; margin-bottom: 1.5rem; text-align: center;">📅 Frekuensi & Waktu Mandi Bayi</h2>
+            
+            <div class="schedule-grid">
+                <div class="schedule-card">
+                    <h3 style="margin-bottom: 1rem;">👶 Bayi Baru Lahir (0-6 bulan)</h3>
+                    <div style="font-size: 2rem; margin: 1rem 0;">🍼</div>
+                    <p style="margin-bottom: 1rem;"><strong>Frekuensi:</strong> 2-3 kali seminggu</p>
+                    <p style="margin-bottom: 1rem;"><strong>Durasi:</strong> 5-10 menit</p>
+                    <p><strong>Waktu Terbaik:</strong> Sore hari sebelum tidur</p>
+                </div>
+
+                <div class="schedule-card">
+                    <h3 style="margin-bottom: 1rem;">🚼 Bayi Aktif (6-12 bulan)</h3>
+                    <div style="font-size: 2rem; margin: 1rem 0;">🏃‍♂️</div>
+                    <p style="margin-bottom: 1rem;"><strong>Frekuensi:</strong> Setiap hari</p>
+                    <p style="margin-bottom: 1rem;"><strong>Durasi:</strong> 10-15 menit</p>
+                    <p><strong>Waktu Terbaik:</strong> Sore atau malam hari</p>
+                </div>
+
+                <div class="schedule-card">
+                    <h3 style="margin-bottom: 1rem;">🌙 Rutinitas Tidur</h3>
+                    <div style="font-size: 2rem; margin: 1rem 0;">😴</div>
+                    <p style="margin-bottom: 1rem;"><strong>Waktu:</strong> 30-60 menit sebelum tidur</p>
+                    <p style="margin-bottom: 1rem;"><strong>Manfaat:</strong> Membantu relaksasi</p>
+                    <p><strong>Tips:</strong> Redupkan lampu, suasana tenang</p>
+                </div>
+            </div>
+
+            <div style="background: #F0FFF4; padding: 2rem; border-radius: 20px; margin: 2rem 0; text-align: center;">
+                <h3 style="color: #22543D; margin-bottom: 1.5rem;">⏰ Kapan Waktu Terbaik Mandi?</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div style="background: white; padding: 1rem; border-radius: 15px;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌅</div>
+                        <h4 style="color: #2C5282;">Pagi Hari</h4>
+                        <p style="color: #4A5568; font-size: 0.9rem;">Untuk bayi yang aktif, membantu memulai hari</p>
+                    </div>
+                    <div style="background: white; padding: 1rem; border-radius: 15px;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌤️</div>
+                        <h4 style="color: #2C5282;">Siang Hari</h4>
+                        <p style="color: #4A5568; font-size: 0.9rem;">Setelah bermain kotor atau cuaca panas</p>
+                    </div>
+                    <div style="background: white; padding: 1rem; border-radius: 15px;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌅</div>
+                        <h4 style="color: #2C5282;">Sore/Malam</h4>
+                        <p style="color: #4A5568; font-size: 0.9rem;">Ideal untuk rutinitas tidur, membantu relaksasi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #FFFAF0; padding: 1.5rem; border-radius: 15px; margin-top: 2rem;">
+                <h4 style="color: #C05621; margin-bottom: 1rem;">📋 Tanda Bayi Perlu Mandi Extra</h4>
+                <ul style="color: #744210; line-height: 1.8; padding-left: 1.5rem;">
+                    <li>Setelah BAB yang bocor dari popok</li>
+                    <li>Setelah muntah atau tumpahan makanan</li>
+                    <li>Cuaca sangat panas dan berkeringat</li>
+                    <li>Setelah bermain di luar rumah</li>
+                    <li>Bau badan yang tidak biasa</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Progress bar animation
+        let progress = 0;
+        const progressBar = document.getElementById('progressBar');
+        
+        function updateProgress() {
+            progress += 25;
+            if (progress > 100) progress = 0;
+            progressBar.style.width = progress + '%';
+        }
+
+        // Step indicator
+        let currentStep = 1;
+        const steps = document.querySelectorAll('.step');
+        
+        function nextStep() {
+            steps[currentStep - 1].classList.remove('active');
+            currentStep = currentStep >= 4 ? 1 : currentStep + 1;
+            steps[currentStep - 1].classList.add('active');
+            updateProgress();
+        }
+
+        // Auto-advance steps
+        setInterval(nextStep, 3000);
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Temperature Slider
+        const tempSlider = document.getElementById('tempSlider');
+        const tempDisplay = document.getElementById('tempDisplay');
+        const tempStatus = document.getElementById('tempStatus');
+
+        if (tempSlider) {
+            tempSlider.addEventListener('input', function() {
+                const temp = this.value;
+                tempDisplay.textContent = temp + '°C';
+                
+                // Remove all status classes
+                tempStatus.className = 'temp-status';
+                
+                if (temp < 36) {
+                    tempStatus.classList.add('temp-cold');
+                    tempStatus.textContent = 'Terlalu Dingin! 🥶';
+                } else if (temp >= 36 && temp <= 38) {
+                    tempStatus.classList.add('temp-perfect');
+                    tempStatus.textContent = 'Suhu Sempurna! 👍';
+                } else {
+                    tempStatus.classList.add('temp-hot');
+                    tempStatus.textContent = 'Terlalu Panas! 🔥';
+                }
+            });
+        }
+
+        // Checklist functionality
+        function toggleChecklist(item) {
+            const checkbox = item.querySelector('.checkbox');
+            const isChecked = item.classList.contains('checked');
+            
+            if (isChecked) {
+                item.classList.remove('checked');
+                checkbox.classList.remove('checked');
+                checkbox.innerHTML = '';
+            } else {
+                item.classList.add('checked');
+                checkbox.classList.add('checked');
+                checkbox.innerHTML = '✓';
+            }
+            
+            // Check if all items are checked
+            const allItems = document.querySelectorAll('.checklist-item');
+            const checkedItems = document.querySelectorAll('.checklist-item.checked');
+            
+            if (allItems.length === checkedItems.length) {
+                showNotification('🎉 Persiapan lengkap! Bayi siap dimandikan!', 'success');
+            }
+        }
+
+        // Tutorial navigation
+        let currentTutorialStep = 1;
+        const totalTutorialSteps = 4;
+
+        function showTutorialStep(stepNumber) {
+            // Hide all steps
+            for (let i = 1; i <= totalTutorialSteps; i++) {
+                const step = document.getElementById('step' + i);
+                if (step) step.classList.remove('active');
+            }
+            
+            // Show current step
+            const currentStepEl = document.getElementById('step' + stepNumber);
+            if (currentStepEl) currentStepEl.classList.add('active');
+            
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn) prevBtn.disabled = stepNumber === 1;
+            if (nextBtn) {
+                nextBtn.disabled = stepNumber === totalTutorialSteps;
+                nextBtn.textContent = stepNumber === totalTutorialSteps ? 'Selesai ✅' : 'Selanjutnya ➡️';
+            }
+        }
+
+        function nextTutorialStep() {
+            if (currentTutorialStep < totalTutorialSteps) {
+                currentTutorialStep++;
+                showTutorialStep(currentTutorialStep);
+            }
+        }
+
+        function prevTutorialStep() {
+            if (currentTutorialStep > 1) {
+                currentTutorialStep--;
+                showTutorialStep(currentTutorialStep);
+            }
+        }
+
+        // Alias functions for button clicks
+        function nextStep() {
+            nextTutorialStep();
+        }
+
+        function prevStep() {
+            prevTutorialStep();
+        }
+
+        // Product information
+        const productInfo = {
+            soap: {
+                title: '🧼 Sabun Bayi',
+                description: 'Sabun khusus bayi dengan pH seimbang (5.5-7.0) yang tidak mengiritasi kulit sensitif. Bebas dari bahan kimia keras seperti sulfat dan paraben.',
+                tips: '💡 Tips: Gunakan sedikit saja, busa berlebihan justru sulit dibilas dan dapat mengiritasi kulit bayi.'
+            },
+            shampoo: {
+                title: '🧴 Shampo Bayi',
+                description: 'Shampo dengan formula "no tears" yang tidak perih di mata. Diformulasikan khusus untuk rambut dan kulit kepala bayi yang masih tipis.',
+                tips: '💡 Tips: Keramas 2-3 kali seminggu sudah cukup untuk bayi baru lahir. Pijat kulit kepala dengan lembut.'
+            },
+            lotion: {
+                title: '🧴 Lotion Bayi',
+                description: 'Lotion hypoallergenic yang melembapkan tanpa menyumbat pori-pori. Mengandung bahan alami seperti chamomile atau aloe vera.',
+                tips: '💡 Tips: Aplikasikan saat kulit masih sedikit lembap setelah mandi untuk hasil optimal.'
+            },
+            oil: {
+                title: '🛢️ Minyak Bayi',
+                description: 'Minyak alami 100% seperti minyak kelapa atau jojoba yang aman untuk kulit bayi. Membantu melembapkan dan memijat bayi.',
+                tips: '💡 Tips: Hangatkan minyak di telapak tangan sebelum diaplikasikan. Cocok untuk pijat sebelum tidur.'
+            }
+        };
+
+        function showProductInfo(productType) {
+            const info = productInfo[productType];
+            const infoDiv = document.getElementById('productInfo');
+            const titleEl = document.getElementById('productTitle');
+            const descEl = document.getElementById('productDescription');
+            const tipsEl = document.getElementById('productTips');
+            
+            if (info && infoDiv && titleEl && descEl && tipsEl) {
+                titleEl.textContent = info.title;
+                descEl.textContent = info.description;
+                tipsEl.textContent = info.tips;
+                infoDiv.style.display = 'block';
+                
+                // Scroll to info
+                infoDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Quiz functionality
+        function selectQuizOption(element, isCorrect) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+                if (option === element) {
+                    option.classList.add(isCorrect ? 'correct' : 'incorrect');
+                } else if (option.textContent === '37-38°C') {
+                    option.classList.add('correct');
+                }
+            });
+
+            // Show explanation after 1 second
+            setTimeout(() => {
+                if (isCorrect) {
+                    showNotification('✅ Benar! Suhu 37-38°C adalah yang paling nyaman untuk bayi', 'success');
+                } else {
+                    showNotification('❌ Suhu yang tepat adalah 37-38°C untuk kenyamanan bayi', 'error');
+                }
+            }, 1000);
+        }
+
+        // Notification system
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: ${type === 'success' ? 'linear-gradient(135deg, #48BB78, #38A169)' : 'linear-gradient(135deg, #F56565, #E53E3E)'};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 15px;
+                font-weight: 600;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 2000;
+                animation: slideInRight 0.5s ease;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        // Floating tips rotation
+        const tips = [
+            "Selalu periksa suhu air dengan siku Anda sebelum memandikan bayi. Siku lebih sensitif daripada tangan!",
+            "Bayi baru lahir tidak perlu dimandikan setiap hari. 2-3 kali seminggu sudah cukup.",
+            "Siapkan semua perlengkapan sebelum mulai mandi agar tidak meninggalkan bayi sendirian.",
+            "Durasi mandi ideal untuk bayi adalah 5-10 menit untuk menghindari kedinginan.",
+            "Gunakan sabun khusus bayi yang pH balanced dan bebas parfum untuk kulit sensitif.",
+            "Setelah mandi, keringkan bayi dengan cara menepuk lembut, bukan menggosok."
+        ];
+
+        let currentTipIndex = 0;
+        
+        function rotateTips() {
+            const tipElement = document.getElementById('floatingTip');
+            if (tipElement) {
+                tipElement.style.opacity = '0';
+                setTimeout(() => {
+                    currentTipIndex = (currentTipIndex + 1) % tips.length;
+                    tipElement.textContent = tips[currentTipIndex];
+                    tipElement.style.opacity = '1';
+                }, 300);
+            }
+        }
+
+        // Rotate tips every 8 seconds
+        setInterval(rotateTips, 8000);
+
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            .floating-tips .tip-content {
+                transition: opacity 0.3s ease;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Initialize animations and reset tutorial step when opening modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.education-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                }, index * 200);
+            });
+        });
+
+        // Reset tutorial when opening technique modal
+        const originalOpenModal = openModal;
+        openModal = function(modalId) {
+            if (modalId === 'teknikModal') {
+                currentTutorialStep = 1;
+                showTutorialStep(1);
+            }
+            originalOpenModal(modalId);
+        };
+    </script>
+</body>
+</html>

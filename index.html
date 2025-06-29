@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BUNAVI - Selamat Datang</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+</head>
+<body>
+    
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <nav class="navbar loading">
+  <div class="logo">BUNAVI</div>
+  <div class="hamburger" id="hamburger">☰</div>
+
+  <ul class="nav-links desktop-only">
+    <li class="nav-item"><a href="index.html" class="active">Beranda</a></li>
+    <li class="nav-item has-dropdown">
+      <a href="#">Materi</a>
+      <div class="dropdown">
+        <a href="kehamilan.html" class="dropdown-item">📱 Kehamilan</a>
+        <a href="asi.html" class="dropdown-item">🍼 Pemberian Asi</a>
+        <a href="Kebersihan_dan_mandi_bayi.html" class="dropdown-item">🏥 Kebersihan dan Mandi</a>
+        <a href="Pola_tidur.html" class="dropdown-item">🍼 Pola Tidur</a>
+        <a href="Perkembangan_motorik_bayi.html" class="dropdown-item">🏥 Perkembangan Motorik</a>
+        <a href="imunisasi.html" class="dropdown-item">🏥 Kesehatan dan Imunisasi</a>
+        <a href="Keamanan_bayi.html" class="dropdown-item">👶 Keamanan Bayi</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="about_page.html">Tentang Kami</a></li>
+  </ul>
+</nav>
+
+<!-- Taruh ini SETELAH tag </nav> -->
+<ul class="nav-menu mobile-nav" id="navMenu">
+  <li><a href="about_page.html">Tentang Kami</a></li>
+</ul>
+
+
+    <header class="hero-section loading">
+        <div class="hero-text">
+            <h1>Fokus bantu ibu <br>Menavigasi kehamilan<br>& Tumbuh kembang anak</h1>
+            <a href="kehamilan.html" class="btn pulse">MULAI BELAJAR</a>
+        </div>
+        <div class="hero-image">
+            <img src="assets/logo.png" alt="Ibu dan Anak" />
+        </div>
+    </header>
+
+    <main class="content-grid loading">
+        <section class="topics">
+            <h2>✨ Topik Edukasi</h2>
+            <div class="grid">
+                <div class="card" onclick="window.location.href='kehamilan.html'">
+                    <img src="assets/kehamilan.png" alt="Kehamilan">
+                    <p>Kehamilan</p>
+                </div>
+                <div class="card" onclick="window.location.href='Perawatan_bayi.html'">
+                    <img src="assets/perawatan-bayi.png" alt="Perawatan Bayi">
+                    <p>Perawatan Bayi</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="articles">
+            <h2>📚 Artikel</h2>
+            <div class="card" onclick="window.location.href='artikel.html'">
+                <img src="assets/ibu-anak.png" alt="Artikel Anak">
+                <p>Artikel</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Enhanced JavaScript for animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove loading class after page loads
+            setTimeout(() => {
+                document.querySelectorAll('.loading').forEach(el => {
+                    el.classList.remove('loading');
+                });
+            }, 100);
+
+            // Enhanced dropdown functionality
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            navItems.forEach(item => {
+                const dropdown = item.querySelector('.dropdown');
+                if (dropdown) {
+                    let hoverTimeout;
+                    
+                    item.addEventListener('mouseenter', () => {
+                        clearTimeout(hoverTimeout);
+                        dropdown.style.opacity = '1';
+                        dropdown.style.visibility = 'visible';
+                        dropdown.style.transform = 'translateY(0)';
+                    });
+                    
+                    item.addEventListener('mouseleave', () => {
+                        hoverTimeout = setTimeout(() => {
+                            dropdown.style.opacity = '0';
+                            dropdown.style.visibility = 'hidden';
+                            dropdown.style.transform = 'translateY(-10px)';
+                        }, 100);
+                    });
+                }
+            });
+
+            // Enhanced card hover effects
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Parallax effect for floating shapes
+            window.addEventListener('mousemove', (e) => {
+                const shapes = document.querySelectorAll('.shape');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                shapes.forEach((shape, index) => {
+                    const speed = (index + 1) * 0.5;
+                    const xOffset = (x - 0.5) * speed * 20;
+                    const yOffset = (y - 0.5) * speed * 20;
+                    
+                    shape.style.transform += ` translate(${xOffset}px, ${yOffset}px)`;
+                });
+            });
+
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.card, .article-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+            // Service Worker
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("/service-worker.js")
+                    .then(() => console.log("Service Worker Registered"))
+                    .catch(error => console.error("Service Worker Failed", error));
+            }
+        ;
+
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const toggleButton = document.querySelector('.mobile-menu-toggle');
+            navMenu.classList.toggle('active');
+            toggleButton.classList.toggle('active');
+        }
+
+          document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+
+            hamburger.addEventListener('click', function () {
+            navMenu.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

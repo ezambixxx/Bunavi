@@ -1,0 +1,32 @@
+@media (max-width: 768px) {
+  /* Pastikan tombol tetap kelihatan */
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Dropdown disembunyikan default */
+  .has-dropdown .dropdown {
+    display: none;
+  }
+
+  /* Saat class open ditambahkan */
+  .has-dropdown.open .dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    position: static;
+    background: transparent;
+    box-shadow: none;
+    padding-top: 0.5rem;
+  }
+
+  .dropdown-item {
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    margin: 0.3rem 0;
+    padding: 0.8rem;
+  }
+}

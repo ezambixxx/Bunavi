@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tentang Kami - BUNAVI</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Tambahkan style khusus dari about_page -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <style>
+         .about-hero {
+            background: linear-gradient(135deg, #4a90a4 0%, #66BB6A 50%, #4CAF50 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 25s linear infinite;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .about-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            line-height: 1.6;
+            animation: slideInRight 1s ease-out 0.3s both;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 30%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 25%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        .floating-icon:nth-child(4) {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(-15px) rotate(-5deg); }
+        }
+
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .section-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #4a90a4, #66BB6A, #4CAF50);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #4a90a4, #4CAF50);
+            border-radius: 2px;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: linear-gradient(135deg, rgba(74, 144, 164, 0.1), rgba(255, 255, 255, 0.9));
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(74, 144, 164, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(74, 144, 164, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .team-member:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50px, 50px);
+        }
+
+        .team-member:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(74, 144, 164, 0.2);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a90a4, #66BB6A);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .member-avatar {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .member-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .member-role {
+            color: #4a90a4;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .member-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .thanks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .thanks-item {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(255, 255, 255, 0.9));
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid #4CAF50;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thanks-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .thanks-item:hover::before {
+            left: 100%;
+        }
+
+        .thanks-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.2);
+        }
+
+        .thanks-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .thanks-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4a90a4, #4CAF50);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a90a4, #66BB6A);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .contact-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .contact-link {
+            color: #4a90a4;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #4CAF50;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 3rem 1rem;
+                min-height: 50vh;
+            }
+
+            .about-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-hero p {
+                font-size: 1.1rem;
+            }
+
+            .content-section {
+                padding: 2rem 1rem;
+            }
+
+            .section-card {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .team-grid, .thanks-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .floating-icon {
+                display: none;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+    </style>
+</head>
+
+<body>
+    <!-- Navbar tetap from about.html -->
+    <nav class="navbar loading">
+        <a href="index.html" class="back-button-mobile">←</a>
+        <div class="logo">BUNAVI</div>
+        <ul class="nav-links desktop-only">
+            <li class="nav-item"><a href="index.html">Beranda</a></li>
+            <li class="nav-item has-dropdown">
+                <a href="#">Materi</a>
+                <div class="dropdown">
+                    <a href="kehamilan.html" class="dropdown-item">📱 Kehamilan</a>
+                    <a href="asi.html" class="dropdown-item">🍼 Pemberian Asi</a>
+                    <a href="Kebersihan_dan_mandi_bayi.html" class="dropdown-item">🏥 Kebersihan dan Mandi</a>
+                    <a href="Pola_tidur.html" class="dropdown-item">🍼 Pola Tidur</a>
+                    <a href="Perkembangan_motorik_bayi.html" class="dropdown-item">🏥 Perkembangan Motorik</a>
+                    <a href="imunisasi.html" class="dropdown-item">🏥 Kesehatan dan Imunisasi</a>
+                    <a href="Keamanan_bayi.html" class="dropdown-item">👶 Keamanan Bayi</a>
+                </div>
+            </li>
+            <li class="nav-item"><a href="about.html" class="active">Tentang Kami</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="about-hero">
+        <div class="floating-icon">👶</div>
+        <div class="floating-icon">🤱</div>
+        <div class="floating-icon">💝</div>
+        <div class="floating-icon">🌟</div>
+
+        <div class="about-hero-content">
+            <h1>Tentang BUNAVI</h1>
+            <p>Platform edukasi terpercaya untuk membantu ibu dalam menavigasi perjalanan kehamilan dan tumbuh kembang anak dengan penuh kasih sayang dan pengetahuan yang tepat.</p>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="content-section">
+        <!-- Deskripsi -->
+        <div class="section-card">
+            <h2 class="section-title">🌸 Tentang Kami</h2>
+            <p class="description-text">
+                BUNAVI (Bunda Navigator) adalah platform digital yang dirancang khusus untuk mendampingi para ibu dalam perjalanan luar biasa mereka sebagai seorang bunda. Kami memahami bahwa menjadi seorang ibu adalah pengalaman yang penuh dengan kebahagiaan, tantangan, dan momen-momen berharga yang tak terlupakan.
+                <br><br>
+                Dengan menyediakan informasi yang akurat, mudah dipahami, dan dapat diakses kapan saja, BUNAVI berkomitmen untuk menjadi teman setia setiap ibu dalam menghadapi berbagai fase kehidupan, mulai dari kehamilan hingga tumbuh kembang buah hati.
+            </p>
+        </div>
+
+        <!-- Kenapa Membuat BUNAVI -->
+        <div class="section-card">
+            <h2 class="section-title">💡 Mengapa BUNAVI?</h2>
+            <p class="description-text">
+                Kami percaya bahwa setiap ibu berhak mendapatkan informasi yang tepat dan dukungan yang mereka butuhkan. Dalam era digital ini, banyak informasi yang tersebar di internet, namun tidak semuanya dapat dipercaya atau sesuai dengan kondisi di Indonesia.
+                <br><br>
+                BUNAVI hadir untuk menjawab kebutuhan akan sumber informasi yang:
+                <br>
+                ✨ <strong>Terpercaya</strong> - Disusun berdasarkan penelitian dan panduan medis terkini
+                <br>
+                ✨ <strong>Mudah Diakses</strong> - Dapat digunakan kapan saja dan dimana saja
+                <br>
+                ✨ <strong>Sesuai Konteks</strong> - Disesuaikan dengan budaya dan kondisi Indonesia
+                <br>
+                ✨ <strong>Komprehensif</strong> - Mulai dari kehamilan hingga tumbuh kembang anak
+            </p>
+        </div>
+
+        <!-- Tim Developer -->
+        <div class="section-card">
+            <h2 class="section-title">👥 Tim Developer</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">👨‍💻</div>
+                    <h3 class="member-name">Tim Development</h3>
+                    <p class="member-role">Full Stack Developer</p>
+                    <p class="member-description">
+                        Tim developer yang berdedikasi untuk menciptakan platform yang user-friendly dan informatif bagi para ibu di Indonesia.
+                    </p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👩‍⚕️</div>
+                    <h3 class="member-name">Tim Konsultan Medis</h3>
+                    <p class="member-role">Medical Advisor</p>
+                    <p class="member-description">
+                        Para ahli di bidang kebidanan dan pediatri yang memastikan keakuratan informasi medis dalam platform ini.
+                    </p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">🎨</div>
+                    <h3 class="member-name">Tim UI/UX</h3>
+                    <p class="member-role">Design & User Experience</p>
+                    <p class="member-description">
+                        Desainer yang merancang antarmuka yang intuitif dan menyenangkan untuk pengalaman pengguna yang optimal.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thanks To -->
+        <div class="section-card">
+            <h2 class="section-title">🙏 Terima Kasih Kepada</h2>
+            <div class="thanks-grid">
+                <div class="thanks-item">
+                    <span class="thanks-icon">👩‍⚕️</span>
+                    <div class="thanks-title">Tenaga Medis</div>
+                    <p>Para dokter, bidan, dan perawat yang telah memberikan panduan dan verifikasi medis</p>
+                </div>
+                <div class="thanks-item">
+                    <span class="thanks-icon">👥</span>
+                    <div class="thanks-title">Komunitas Ibu</div>
+                    <p>Para ibu yang telah berbagi pengalaman dan memberikan feedback untuk pengembangan platform</p>
+                </div>
+                <div class="thanks-item">
+                    <span class="thanks-icon">📚</span>
+                    <div class="thanks-title">Sumber Referensi</div>
+                    <p>WHO, IDAI, POGI, dan institusi kesehatan lainnya yang menyediakan panduan medis terpercaya</p>
+                </div>
+                <div class="thanks-item">
+                    <span class="thanks-icon">💻</span>
+                    <div class="thanks-title">Open Source Community</div>
+                    <p>Para developer yang telah berkontribusi pada teknologi dan framework yang kami gunakan</p>
+                </div>
+                <div class="thanks-item">
+                    <span class="thanks-icon">👨‍👩‍👧‍👦</span>
+                    <div class="thanks-title">Keluarga & Teman</div>
+                    <p>Dukungan moral dan motivasi dari keluarga dan teman-teman terdekat</p>
+                </div>
+                <div class="thanks-item">
+                    <span class="thanks-icon">🌟</span>
+                    <div class="thanks-title">Para Pengguna</div>
+                    <p>Setiap ibu yang mempercayai BUNAVI sebagai panduan dalam perjalanan keibuan mereka</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kontak -->
+        <div class="section-card contact-section">
+            <h2 class="section-title">📞 Hubungi Kami</h2>
+            <p class="description-text">
+                Kami senang mendengar dari Anda! Jika ada pertanyaan, saran, atau feedback, jangan ragu untuk menghubungi kami.
+            </p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3 class="contact-title">Email</h3>
+                    <p class="contact-info">
+                        <a href="mailto:info@bunavi.id" class="contact-link">info@bunavi.id</a><br><small>Respon dalam 24 jam</small>
+                    </p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <h3 class="contact-title">WhatsApp</h3>
+                    <p class="contact-info">
+                        <a href="https://wa.me/6281234567890" class="contact-link">+62 812-3456-7890</a><br><small>Layanan Senin-Jumat 09:00-17:00</small>
+                    </p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <h3 class="contact-title">Media Sosial</h3>
+                    <p class="contact-info">
+                        <a href="#" class="contact-link">@bunavi.id</a><br><small>Instagram & Facebook</small>
+                    </p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <h3 class="contact-title">Alamat</h3>
+                    <p class="contact-info">
+                        Jakarta, Indonesia<br><small>Kantor Virtual - Online Support</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animasi fade-in konten saat scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.section-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+
+</html>

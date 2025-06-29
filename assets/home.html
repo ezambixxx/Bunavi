@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BUNAVI - Selamat Datang</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">BUNAVI</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Beranda</a></li>
+            <li><a href="#">Materi</a></li>
+            <li><a href="#">Profil</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-text">
+            <h1>Fokus bantu ibu <br>“menavigasi“ kehamilan<br>& tumbuh kembang anak</h1>
+            <a href="kehamilan.html" class="btn">MULAI BELAJAR</a>
+        </div>
+        <div class="hero-image">
+            <img src="assets/logo.png" alt="Ibu dan Anak" />
+        </div>
+    </header>
+
+    <main class="content-grid">
+        <section class="topics">
+            <h2>Topik Edukasi</h2>
+            <div class="grid">
+                <div class="card" onclick="window.location.href='kehamilan.html'">
+                    <img src="assets/kehamilan.png" alt="Kehamilan">
+                    <p>Kehamilan</p>
+                </div>
+             <div class="card" onclick="window.location.href='perawatan_bayi.html'">
+                    <img src="assets/perawatan-bayi.png" alt="Perawatan Bayi">
+                    <p>Perawatan Bayi</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="articles">
+            <h2>Artikel</h2>
+            <div class="article-card">
+                <img src="assets/ibu-anak.png" alt="Artikel Anak">
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

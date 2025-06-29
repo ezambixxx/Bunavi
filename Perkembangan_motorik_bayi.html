@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Perkembangan Motorik Bayi - BUNAVI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #E8F4FD 0%, #B8E6FF 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            overflow: visible !important;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #2c5f2d, #4a90a4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-left: -6px;
+            display: inline-block;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #4a90a4;
+            background: linear-gradient(135deg, rgba(74, 144, 164, 0.1), rgba(76, 175, 80, 0.1));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 164, 0.2);
+        }
+
+        .nav-links a.active {
+            color: white;
+            background: linear-gradient(135deg, #4a90a4, #4CAF50);
+            box-shadow: 0 5px 15px rgba(74, 144, 164, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            color: #2c5a8a;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .age-navigator {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .age-btn {
+            background: white;
+            border: 3px solid #87ceeb;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: #2c5a8a;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .age-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .age-btn.active {
+            background: #87ceeb;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .milestone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .milestone-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .milestone-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+            border-color: #87ceeb;
+        }
+
+        .milestone-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #87ceeb, #4fc3f7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        .milestone-title {
+            color: #2c5a8a;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .milestone-description {
+            color: #666;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .interactive-demo {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .demo-title {
+            color: #2c5a8a;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .demo-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .demo-animation {
+            flex: 1;
+            min-width: 300px;
+            height: 200px;
+            background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .baby-figure {
+            width: 60px;
+            height: 60px;
+            background: #ffb74d;
+            border-radius: 50%;
+            position: relative;
+            animation: babyMove 3s ease-in-out infinite;
+        }
+
+        .baby-figure::after {
+            content: '👶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+        }
+
+        .demo-steps {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .step-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #87ceeb;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            color: #2c5a8a;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, #fff3e0, #fff8e1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 3px solid #ffcc02;
+        }
+
+        .tips-title {
+            color: #f57f17;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .warning-section {
+            background: linear-gradient(135deg, #ffebee, #fce4ec);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 3px solid #f48fb1;
+        }
+
+        .warning-title {
+            color: #c2185b;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-tracker {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .progress-title {
+            color: #2c5a8a;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+            border-radius: 10px;
+            transition: width 1s ease;
+            width: 0%;
+        }
+
+        .progress-label {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes babyMove {
+            0% { transform: translateX(-50px); }
+            50% { transform: translateX(50px); }
+            100% { transform: translateX(-50px); }
+        }
+
+        .floating-help {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #87ceeb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-help:hover {
+            transform: scale(1.1);
+            background: #4fc3f7;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .demo-content {
+                flex-direction: column;
+            }
+            
+            .age-navigator {
+                gap: 0.5rem;
+            }
+            
+            .age-btn {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar loading">
+    <div class="logo">BUNAVI</div>
+    <ul class="nav-links">
+        <!-- Beranda -->
+        <li class="nav-links">
+            <a href="Perawatan_bayi.html" class="active">Menu Sebelumnya</a>
+        </li>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Perkembangan Motorik Bayi</h1>
+            <p>Pantau dan pahami tahap perkembangan motorik si kecil dengan panduan interaktif berdasarkan standar KIA</p>
+        </div>
+
+        <div class="age-navigator">
+            <div class="age-btn active" onclick="showContent('0-3')">0-3 Bulan</div>
+            <div class="age-btn" onclick="showContent('4-6')">4-6 Bulan</div>
+            <div class="age-btn" onclick="showContent('7-9')">7-9 Bulan</div>
+            <div class="age-btn" onclick="showContent('10-12')">10-12 Bulan</div>
+            <div class="age-btn" onclick="showContent('13-18')">13-18 Bulan</div>
+        </div>
+
+        <!-- Konten 0-3 Bulan -->
+        <div class="content-section active" id="content-0-3">
+            <div class="milestone-grid">
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🤱</div>
+                    <div class="milestone-title">Refleks Primitif</div>
+                    <div class="milestone-description">Bayi menunjukkan refleks menggenggam, menghisap, dan refleks moro yang normal</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">👀</div>
+                    <div class="milestone-title">Kontrol Kepala</div>
+                    <div class="milestone-description">Mulai dapat mengangkat kepala sebentar saat tengkurap</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">✋</div>
+                    <div class="milestone-title">Gerakan Tangan</div>
+                    <div class="milestone-description">Tangan mulai terbuka dari kepalan dan gerakan lebih terarah</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">Stimulasi Motorik 0-3 Bulan</div>
+                <div class="demo-content">
+                    <div class="demo-animation">
+                        <div class="baby-figure"></div>
+                    </div>
+                    <div class="demo-steps">
+                        <div class="step-item">
+                            <span class="step-number">1.</span>
+                            Tummy time 2-3 kali sehari selama 3-5 menit
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2.</span>
+                            Latihan mengangkat kepala dengan mainan berwarna cerah
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3.</span>
+                            Pijat lembut untuk merangsang refleks genggam
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <div class="tips-title">
+                    💡 Tips Orang Tua
+                </div>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <strong>Posisi Tengkurap:</strong> Selalu awasi bayi saat tummy time dan pastikan dalam kondisi terjaga
+                    </div>
+                    <div class="tip-card">
+                        <strong>Stimulasi Visual:</strong> Gunakan mainan kontras tinggi untuk merangsang penglihatan
+                    </div>
+                    <div class="tip-card">
+                        <strong>Kontak Fisik:</strong> Sentuhan lembut membantu perkembangan sistem saraf
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-section">
+                <div class="warning-title">
+                    ⚠️ Perhatian Khusus
+                </div>
+                <p>Konsultasi dengan dokter jika bayi tidak menunjukkan refleks primitif atau tidak dapat mengangkat kepala sama sekali pada usia 3 bulan.</p>
+            </div>
+        </div>
+
+<!-- Konten 4-6 Bulan -->
+        <div class="content-section" id="content-4-6">
+            <div class="milestone-grid">
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🎯</div>
+                    <div class="milestone-title">Koordinasi Mata-Tangan</div>
+                    <div class="milestone-description">Bayi mulai dapat meraih dan memegang benda dengan lebih terarah, mampu memindahkan mainan dari tangan ke tangan</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🔄</div>
+                    <div class="milestone-title">Berguling</div>
+                    <div class="milestone-description">Mulai belajar berguling dari telentang ke tengkurap dan sebaliknya</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">💪</div>
+                    <div class="milestone-title">Kontrol Kepala & Leher</div>
+                    <div class="milestone-description">Dapat menopang kepala dengan stabil dan mengangkat dada saat tengkurap</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🪑</div>
+                    <div class="milestone-title">Duduk dengan Bantuan</div>
+                    <div class="milestone-description">Mulai bisa duduk dengan bantuan dan menunjukkan ketertarikan untuk duduk</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">👶</div>
+                    <div class="milestone-title">Gerakan Kaki</div>
+                    <div class="milestone-description">Menendang-nendang dengan kuat dan menikmati berdiri dengan bantuan</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🍼</div>
+                    <div class="milestone-title">Koordinasi Mulut</div>
+                    <div class="milestone-description">Mulai mengeksplorasi benda dengan mulut dan menunjukkan refleks menelan yang baik</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">Stimulasi Motorik 4-6 Bulan</div>
+                <div class="demo-content">
+                    <div class="demo-animation">
+                        <div class="baby-figure"></div>
+                    </div>
+                    <div class="demo-steps">
+                        <div class="step-item">
+                            <span class="step-number">1.</span>
+                            Tummy time yang lebih lama (15-20 menit) dengan mainan di depan
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2.</span>
+                            Latihan duduk dengan bantuan bantal atau kursi bayi
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3.</span>
+                            Berikan mainan yang dapat digenggam untuk koordinasi tangan
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">4.</span>
+                            Dorong bayi untuk berguling dengan meletakkan mainan di samping
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <div class="tips-title">
+                    💡 Tips Orang Tua
+                </div>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <strong>Keamanan:</strong> Pastikan area bermain aman karena bayi mulai aktif berguling
+                    </div>
+                    <div class="tip-card">
+                        <strong>Mainan Edukatif:</strong> Pilih mainan dengan tekstur berbeda untuk stimulasi sensorik
+                    </div>
+                    <div class="tip-card">
+                        <strong>Rutinitas:</strong> Buat jadwal tummy time yang konsisten setiap hari
+                    </div>
+                    <div class="tip-card">
+                        <strong>Interaksi:</strong> Banyak berbicara dan bernyanyi saat bermain bersama
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-section">
+                <div class="warning-title">
+                    ⚠️ Perhatian Khusus
+                </div>
+                <p>Konsultasi dengan dokter jika bayi belum bisa mengangkat kepala dengan stabil, tidak menunjukkan minat untuk meraih benda, atau belum mulai berguling pada usia 6 bulan. Juga perhatikan jika bayi tidak menunjukkan reaksi terhadap suara atau gerakan di sekitarnya.</p>
+            </div>
+        </div>
+
+<!-- Konten 7-9 Bulan -->
+<div class="content-section" id="content-7-9">
+            <div class="milestone-grid">
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🪑</div>
+                    <div class="milestone-title">Duduk Mandiri</div>
+                    <div class="milestone-description">Bayi dapat duduk tanpa bantuan dengan punggung tegak selama beberapa menit</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">👶</div>
+                    <div class="milestone-title">Merangkak</div>
+                    <div class="milestone-description">Mulai merangkak dengan koordinasi tangan dan kaki yang baik</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🤏</div>
+                    <div class="milestone-title">Pincer Grasp</div>
+                    <div class="milestone-description">Dapat mengambil benda kecil dengan jari telunjuk dan ibu jari</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🧸</div>
+                    <div class="milestone-title">Transfer Objek</div>
+                    <div class="milestone-description">Dapat memindahkan mainan dari satu tangan ke tangan lainnya</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">Stimulasi Motorik 7-9 Bulan</div>
+                <div class="demo-content">
+                    <div class="demo-animation">
+                        <div class="baby-figure"></div>
+                    </div>
+                    <div class="demo-steps">
+                        <div class="step-item">
+                            <span class="step-number">1.</span>
+                            Latihan duduk dengan bantuan bantal penyangga
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2.</span>
+                            Berikan mainan untuk merangsang gerakan merangkak
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3.</span>
+                            Sediakan makanan finger food untuk latihan pincer grasp
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">4.</span>
+                            Bermain cilukba sambil duduk untuk keseimbangan
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <div class="tips-title">
+                    💡 Tips Orang Tua
+                </div>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <strong>Baby Proofing:</strong> Pastikan rumah aman untuk bayi yang mulai mobile
+                    </div>
+                    <div class="tip-card">
+                        <strong>Tekstur Makanan:</strong> Mulai kenalkan finger food dengan tekstur yang sesuai
+                    </div>
+                    <div class="tip-card">
+                        <strong>Waktu Bermain:</strong> Sediakan waktu bermain di lantai yang aman dan bersih
+                    </div>
+                    <div class="tip-card">
+                        <strong>Mainan Edukatif:</strong> Pilih mainan yang merangsang koordinasi mata-tangan
+                    </div>
+                </div>
+            </div>
+            
+            <div class="warning-section">
+                <div class="warning-title">
+                    ⚠️ Perhatian Khusus
+                </div>
+                <p>Konsultasi dengan dokter jika bayi belum bisa duduk tanpa bantuan, tidak menunjukkan minat merangkak, atau belum dapat menggenggam benda dengan baik pada akhir bulan ke-9.</p>
+            </div>
+        </div>
+
+<!-- Konten 10-12 Bulan -->
+<div class="content-section" id="content-10-12">
+            <div class="milestone-grid">
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🚶</div>
+                    <div class="milestone-title">Berjalan Sendiri</div>
+                    <div class="milestone-description">Mulai dapat berjalan beberapa langkah tanpa bantuan atau berpegangan</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">👋</div>
+                    <div class="milestone-title">Gerakan Meniru</div>
+                    <div class="milestone-description">Dapat meniru gerakan sederhana seperti melambaikan tangan dan bertepuk tangan</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🔍</div>
+                    <div class="milestone-title">Pincer Grasp</div>
+                    <div class="milestone-description">Menggunakan ibu jari dan telunjuk untuk mengambil benda kecil dengan presisi</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🧱</div>
+                    <div class="milestone-title">Menumpuk Mainan</div>
+                    <div class="milestone-description">Dapat menumpuk 2-3 balok dan memasukkan benda ke dalam wadah</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🧗</div>
+                    <div class="milestone-title">Memanjat</div>
+                    <div class="milestone-description">Mulai bisa memanjat ke atas sofa atau tempat tidur dengan bantuan</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🥄</div>
+                    <div class="milestone-title">Makan Mandiri</div>
+                    <div class="milestone-description">Mulai menggunakan sendok dengan bantuan dan minum dari cangkir</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">Stimulasi Motorik 10-12 Bulan</div>
+                <div class="demo-content">
+                    <div class="demo-animation">
+                        <div class="baby-figure"></div>
+                    </div>
+                    <div class="demo-steps">
+                        <div class="step-item">
+                            <span class="step-number">1.</span>
+                            Berikan mainan dorong untuk melatih berjalan
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2.</span>
+                            Latihan naik turun tangga dengan pengawasan
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3.</span>
+                            Bermain dengan balok susun dan puzzle sederhana
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">4.</span>
+                            Latihan makan sendiri dengan finger foods
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <div class="tips-title">
+                    💡 Tips Orang Tua
+                </div>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <strong>Keamanan Rumah:</strong> Pasang pengaman di tangga dan sudut tajam karena bayi mulai aktif bergerak
+                    </div>
+                    <div class="tip-card">
+                        <strong>Sepatu yang Tepat:</strong> Biarkan bayi berjalan tanpa alas kaki di dalam rumah untuk keseimbangan yang lebih baik
+                    </div>
+                    <div class="tip-card">
+                        <strong>Mainan Edukatif:</strong> Berikan mainan yang merangsang koordinasi mata-tangan seperti balok dan puzzle
+                    </div>
+                    <div class="tip-card">
+                        <strong>Kesabaran:</strong> Setiap bayi berkembang dengan kecepatan berbeda, jangan terburu-buru
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-section">
+                <div class="warning-title">
+                    ⚠️ Perhatian Khusus
+                </div>
+                <p>Konsultasi dengan dokter jika bayi belum dapat berdiri dengan bantuan, tidak menunjukkan minat untuk berjalan, atau tidak dapat menggunakan pincer grasp pada usia 12 bulan. Juga perhatikan jika bayi kehilangan kemampuan yang sebelumnya sudah dikuasai.</p>
+            </div>
+        </div>
+
+<!-- Konten 13-18 Bulan -->
+        <div class="content-section" id="content-13-18">
+            <div class="milestone-grid">
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🚶</div>
+                    <div class="milestone-title">Berjalan Mandiri</div>
+                    <div class="milestone-description">Dapat berjalan sendiri tanpa bantuan, meskipun masih tertatih-tatih</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">📚</div>
+                    <div class="milestone-title">Membalik Halaman</div>
+                    <div class="milestone-description">Dapat membalik halaman buku meskipun masih beberapa halaman sekaligus</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🧱</div>
+                    <div class="milestone-title">Menyusun Balok</div>
+                    <div class="milestone-description">Mampu menyusun 2-3 balok dan mulai memahami konsep menumpuk</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">🥄</div>
+                    <div class="milestone-title">Makan Sendiri</div>
+                    <div class="milestone-description">Mulai menggunakan sendok untuk makan meskipun masih berantakan</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">✏️</div>
+                    <div class="milestone-title">Mencoret-coret</div>
+                    <div class="milestone-description">Dapat memegang krayon dan membuat coretan di kertas</div>
+                </div>
+                <div class="milestone-card" onclick="animateCard(this)">
+                    <div class="milestone-icon">⚽</div>
+                    <div class="milestone-title">Menendang Bola</div>
+                    <div class="milestone-description">Dapat menendang bola besar tanpa kehilangan keseimbangan</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <div class="demo-title">Stimulasi Motorik 10-12 Bulan</div>
+                <div class="demo-content">
+                    <div class="demo-animation">
+                        <div class="baby-figure"></div>
+                    </div>
+                    <div class="demo-steps">
+                        <div class="step-item">
+                            <span class="step-number">1.</span>
+                            Berikan ruang aman untuk berlatih berjalan dan berlari
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2.</span>
+                            Sediakan mainan push-and-pull untuk koordinasi
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3.</span>
+                            Latihan makan sendiri dengan finger food
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">4.</span>
+                            Bermain dengan balok dan puzzle sederhana
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <div class="tips-title">
+                    💡 Tips Orang Tua
+                </div>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <strong>Keamanan Rumah:</strong> Pastikan rumah sudah baby-proof karena mobilitas meningkat drastis
+                    </div>
+                    <div class="tip-card">
+                        <strong>Sepatu yang Tepat:</strong> Pilih sepatu dengan sol fleksibel atau biarkan bertelanjang kaki di rumah
+                    </div>
+                    <div class="tip-card">
+                        <strong>Kesabaran Makan:</strong> Biarkan anak bereksplorasi dengan makanan meskipun berantakan
+                    </div>
+                    <div class="tip-card">
+                        <strong>Aktivitas Fisik:</strong> Berikan waktu bermain di luar ruangan untuk mengembangkan kekuatan otot
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-section">
+                <div class="warning-title">
+                    ⚠️ Perhatian Khusus
+                </div>
+                <p>Konsultasi dengan dokter jika anak belum bisa berjalan sama sekali pada usia 18 bulan, tidak menunjukkan minat untuk makan sendiri, atau tidak dapat menyusun balok sederhana.</p>
+            </div>
+        </div>
+
+    <div class="floating-help">
+        <span style="font-size: 1.5rem;">❓</span>
+    </div>
+
+    <script>
+        function showContent(age) {
+            // Sembunyikan semua konten
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Hapus class active dari semua tombol
+            const buttons = document.querySelectorAll('.age-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Tampilkan konten yang dipilih
+            document.getElementById(`content-${age}`).classList.add('active');
+            
+            // Tambahkan class active ke tombol yang diklik
+            event.target.classList.add('active');
+            
+            // Animasi progress bar
+            animateProgressBar(age);
+        }
+
+        function animateCard(card) {
+            card.style.transform = 'scale(1.05)';
+            card.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+            
+            setTimeout(() => {
+                card.style.transform = '';
+                card.style.boxShadow = '';
+            }, 200);
+        }
+
+        function animateProgressBar(age) {
+            const progressBar = document.querySelector(`#progress-${age} .progress-fill, .progress-fill`);
+            if (progressBar) {
+                // Reset progress
+                progressBar.style.width = '0%';
+                
+                // Animate progress
+                setTimeout(() => {
+                    const progressValues = {
+                        '0-3': '25%',
+                        '4-6': '45%',
+                        '7-9': '65%',
+                        '10-12': '85%',
+                        '13-18': '100%'
+                    };
+                    progressBar.style.width = progressValues[age] || '25%';
+                }, 100);
+            }
+        }
+
+        // Inisialisasi progress bar untuk konten pertama
+        document.addEventListener('DOMContentLoaded', function() {
+            animateProgressBar('0-3');
+        });
+
+        // Animasi scroll halus untuk navigasi
+        document.querySelectorAll('.age-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Floating help button
+        document.querySelector('.floating-help').addEventListener('click', function() {
+            alert('Panduan ini berdasarkan standar KIA (Kesehatan Ibu dan Anak). Untuk konsultasi lebih lanjut, hubungi tenaga kesehatan terdekat.');
+        });
+
+        // Intersection Observer untuk animasi saat scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe milestone cards
+        document.querySelectorAll('.milestone-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

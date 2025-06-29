@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Keamanan Bayi - BUNAVI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #E8F4FD 0%, #B8E6FF 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            color: rgb(76, 175, 80, 100%);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .header p {
+            font-size: 2rem;
+            opacity: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .intro-section h2 {
+            color: #2c5282;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .safety-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .safety-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .safety-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #4a90a4, #2c5282);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4a90a4, #2c5282);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 5px 15px rgba(74, 144, 164, 0.3);
+        }
+
+        .card-title {
+            color: #2c5282;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .safety-card.active .card-content {
+            max-height: 1000px;
+        }
+
+        .tips-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .tips-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .tips-list li:nth-child(1) { animation-delay: 0.1s; }
+        .tips-list li:nth-child(2) { animation-delay: 0.2s; }
+        .tips-list li:nth-child(3) { animation-delay: 0.3s; }
+        .tips-list li:nth-child(4) { animation-delay: 0.4s; }
+
+        .tips-list li::before {
+            content: '✓';
+            color: #4a90a4;
+            font-weight: bold;
+            margin-right: 0.8rem;
+            margin-top: 0.2rem;
+            font-size: 1.2rem;
+        }
+
+        .interactive-demo {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .demo-title {
+            color: #2c5282;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .scenario-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .scenario-btn {
+            background: linear-gradient(135deg, #4a90a4, #2c5282);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(74, 144, 164, 0.3);
+        }
+
+        .scenario-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 144, 164, 0.4);
+        }
+
+        .scenario-btn.active {
+            background: linear-gradient(135deg, #2c5282, #1a365d);
+        }
+
+        .scenario-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .scenario-content.active {
+            display: block;
+            animation: slideInUp 0.5s ease;
+        }
+        
+        .quiz-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            color: #2c5282;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            background: #e3f2fd;
+            border-color: #4a90a4;
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .floating-tipsbayi {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #4a90a4, #2c5282);
+            color: white;
+            padding: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(74, 144, 164, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .floating-tipsbayi:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .scenario-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .floating-tipsbayi {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar loading">
+    <div class="logo">BUNAVI</div>
+    <ul class="nav-links">
+        <!-- Beranda -->
+        <li class="nav-item">
+            <a href="Perawatan_bayi.html" class="active">Menu Sebelumnya</a>
+        </li>
+    </nav>
+    
+    <div class="container">
+        <div class="intro-section">
+            <h2>Keselamatan Adalah Prioritas Utama</h2>
+            <p>Setiap orang tua ingin memberikan yang terbaik untuk bayinya. Mari pelajari cara menciptakan lingkungan yang aman dan nyaman untuk si kecil berkembang dengan optimal.</p>
+        </div>
+
+
+        <div class="safety-grid">
+            <div class="safety-card" onclick="toggleCard(this)">
+                <div class="card-icon">🏡</div>
+                <div class="card-title">Keamanan Rumah</div>
+                <div class="card-content">
+                    <p>Menciptakan lingkungan rumah yang aman untuk bayi memerlukan perhatian khusus pada setiap sudut rumah.</p>
+                    <ul class="tips-list">
+                        <li>Pasang pengaman pada semua stop kontak listrik</li>
+                        <li>Gunakan pengaman sudut tajam pada furniture</li>
+                        <li>Pastikan tangga memiliki pagar pengaman</li>
+                        <li>Simpan benda kecil yang bisa tertelan jauh dari bayi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="safety-card" onclick="toggleCard(this)">
+                <div class="card-icon">🛏️</div>
+                <div class="card-title">Keamanan Tidur</div>
+                <div class="card-content">
+                    <p>Tidur yang aman adalah kunci mencegah risiko SIDS (Sudden Infant Death Syndrome).</p>
+                    <ul class="tips-list">
+                        <li>Selalu tidurkan bayi dalam posisi telentang</li>
+                        <li>Gunakan kasur yang keras dan rata</li>
+                        <li>Hindari bantal, selimut tebal, dan boneka di tempat tidur</li>
+                        <li>Pastikan suhu kamar tidak terlalu panas atau dingin</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="safety-card" onclick="toggleCard(this)">
+                <div class="card-icon">🚗</div>
+                <div class="card-title">Keamanan Berkendara</div>
+                <div class="card-content">
+                    <p>Car seat yang tepat adalah investasi terbaik untuk keselamatan bayi saat bepergian.</p>
+                    <ul class="tips-list">
+                        <li>Gunakan car seat sesuai usia dan berat bayi</li>
+                        <li>Pastikan car seat terpasang dengan benar</li>
+                        <li>Bayi harus menghadap ke belakang hingga usia 2 tahun</li>
+                        <li>Jangan pernah meninggalkan bayi sendirian di dalam mobil</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="safety-card" onclick="toggleCard(this)">
+                <div class="card-icon">🍼</div>
+                <div class="card-title">Keamanan Makan</div>
+                <div class="card-content">
+                    <p>Pemberian makan yang aman mencegah risiko tersedak dan memastikan nutrisi optimal.</p>
+                    <ul class="tips-list">
+                        <li>Potong makanan dalam ukuran kecil dan lunak</li>
+                        <li>Hindari makanan yang mudah tersangkut seperti kacang</li>
+                        <li>Selalu awasi bayi saat makan</li>
+                        <li>Pastikan suhu makanan tidak terlalu panas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="safety-card" onclick="toggleCard(this)">
+                <div class="card-icon">🛁</div>
+                <div class="card-title">Keamanan Mandi</div>
+                <div class="card-content">
+                    <p>Waktu mandi harus menjadi momen yang menyenangkan dan aman untuk bayi.</p>
+                    <ul class="tips-list">
+                        <li>Cek suhu air dengan termometer atau siku</li>
+                        <li>Jangan pernah tinggalkan bayi sendirian di bak mandi</li>
+                        <li>Gunakan alas anti-slip di bak mandi</li>
+                        <li>Isi air hanya setinggi 5-7 cm untuk bayi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="safety-card" onclick="toggleCard(this)">
+                <div class="card-icon">🧸</div>
+                <div class="card-title">Keamanan Bermain</div>
+                <div class="card-content">
+                    <p>Mainan yang aman mendukung perkembangan bayi tanpa membahayakan keselamatannya.</p>
+                    <ul class="tips-list">
+                        <li>Pilih mainan sesuai usia yang tertera pada kemasan</li>
+                        <li>Hindari mainan dengan bagian kecil yang lepas</li>
+                        <li>Periksa mainan secara rutin dari kerusakan</li>
+                        <li>Pastikan mainan terbuat dari bahan yang aman</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="interactive-demo">
+            <h3 class="demo-title">🎮 Simulasi Situasi Darurat</h3>
+            <p>Pelajari cara menangani situasi darurat dengan simulasi interaktif</p>
+            
+            <div class="scenario-buttons">
+                <button class="scenario-btn active" onclick="showScenario('choking')">Tersedak</button>
+                <button class="scenario-btn" onclick="showScenario('fever')">Demam Tinggi</button>
+                <button class="scenario-btn" onclick="showScenario('fall')">Terjatuh</button>
+                <button class="scenario-btn" onclick="showScenario('burn')">Luka Bakar</button>
+            </div>
+
+            <div class="scenario-content active" id="choking">
+                <h4>🚨 Bayi Tersedak - Apa yang Harus Dilakukan?</h4>
+                <p><strong>Langkah 1:</strong> Tetap tenang dan segera ambil tindakan</p>
+                <p><strong>Langkah 2:</strong> Baringkan bayi tengkurap di lengan Anda</p>
+                <p><strong>Langkah 3:</strong> Berikan 5 tepukan kuat di punggung bayi</p>
+                <p><strong>Langkah 4:</strong> Jika tidak berhasil, balik bayi dan tekan dada 5 kali</p>
+                <p><strong>Langkah 5:</strong> Segera hubungi emergency 119 jika benda tidak keluar</p>
+            </div>
+
+            <div class="scenario-content" id="fever">
+                <h4>🌡️ Demam Tinggi - Penanganan Cepat</h4>
+                <p><strong>Langkah 1:</strong> Ukur suhu tubuh dengan termometer</p>
+                <p><strong>Langkah 2:</strong> Buka pakaian bayi agar tidak kepanasan</p>
+                <p><strong>Langkah 3:</strong> Berikan kompres hangat di dahi</p>
+                <p><strong>Langkah 4:</strong> Pastikan bayi cukup minum ASI</p>
+                <p><strong>Langkah 5:</strong> Segera ke dokter jika suhu >38°C pada bayi <3 bulan</p>
+            </div>
+
+            <div class="scenario-content" id="fall">
+                <h4>🩹 Bayi Terjatuh - Evaluasi dan Tindakan</h4>
+                <p><strong>Langkah 1:</strong> Jangan panik, periksa kondisi bayi dengan tenang</p>
+                <p><strong>Langkah 2:</strong> Periksa apakah bayi sadar dan responsif</p>
+                <p><strong>Langkah 3:</strong> Lihat adanya luka eksternal atau benjolan</p>
+                <p><strong>Langkah 4:</strong> Amati perilaku bayi selama 24 jam</p>
+                <p><strong>Langkah 5:</strong> Segera ke RS jika bayi muntah, kejang, atau tidak sadar</p>
+            </div>
+
+            <div class="scenario-content" id="burn">
+                <h4>🔥 Luka Bakar - Pertolongan Pertama</h4>
+                <p><strong>Langkah 1:</strong> Jauhkan bayi dari sumber panas</p>
+                <p><strong>Langkah 2:</strong> Siram dengan air mengalir (bukan es) selama 10-15 menit</p>
+                <p><strong>Langkah 3:</strong> Jangan oleskan pasta gigi, mentega, atau minyak</p>
+                <p><strong>Langkah 4:</strong> Tutup luka dengan kain bersih dan longgar</p>
+                <p><strong>Langkah 5:</strong> Segera bawa ke fasilitas kesehatan terdekat</p>
+            </div>
+        </div>
+
+        <div class="quiz-section">
+            <h3 style="text-align: center; color: #2c5282; margin-bottom: 2rem;">🧠 Kuis Keamanan Bayi</h3>
+            <div class="quiz-question" id="quizQuestion">
+                Posisi tidur yang paling aman untuk bayi adalah...
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="selectAnswer(this, false)">A. Tengkurap</div>
+                <div class="quiz-option" onclick="selectAnswer(this, false)">B. Miring ke kanan</div>
+                <div class="quiz-option" onclick="selectAnswer(this, true)">C. Telentang</div>
+                <div class="quiz-option" onclick="selectAnswer(this, false)">D. Miring ke kiri</div>
+            </div>
+            <div id="quizFeedback" style="text-align: center; margin-top: 1rem; font-weight: bold;"></div>
+        </div>
+    </div>
+
+    <div class="floating-tipsbayi" onclick="showRandomTip()">
+        💡 Tips
+    </div>
+
+    <script>
+        let cardsOpened = 0;
+        const totalCards = 6;
+        
+        const randomTips = [
+            "💡 Selalu cuci tangan sebelum menyentuh bayi",
+            "💡 Periksa suhu air mandi dengan siku, bukan tangan",
+            "💡 Simpan nomor emergency di tempat yang mudah dijangkau",
+            "💡 Bayi baru lahir perlu tidur 14-17 jam per hari",
+            "💡 Jangan biarkan bayi sendirian di tempat tinggi",
+            "💡 Gunakan baby monitor untuk mengawasi bayi saat tidur"
+        ];
+
+        function toggleCard(card) {
+            card.classList.toggle('active');
+            
+            if (card.classList.contains('active')) {
+                cardsOpened++;
+            } else {
+                cardsOpened--;
+            }
+            
+        }
+
+
+        function showScenario(scenario) {
+            // Remove active class from all buttons and contents
+            document.querySelectorAll('.scenario-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.scenario-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding content
+            event.target.classList.add('active');
+            document.getElementById(scenario).classList.add('active');
+        }
+
+        function selectAnswer(option, isCorrect) {
+            // Remove previous selections
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+            });
+            
+            // Mark the selected answer
+            if (isCorrect) {
+                option.classList.add('correct');
+                document.getElementById('quizFeedback').innerHTML = '✅ Benar! Posisi telentang adalah yang paling aman untuk mencegah SIDS.';
+                document.getElementById('quizFeedback').style.color = '#28a745';
+            } else {
+                option.classList.add('incorrect');
+                document.getElementById('quizFeedback').innerHTML = '❌ Kurang tepat. Posisi telentang adalah yang paling aman untuk bayi.';
+                document.getElementById('quizFeedback').style.color = '#dc3545';
+            }
+        }
+
+        function showRandomTip() {
+            const randomTip = randomTips[Math.floor(Math.random() * randomTips.length)];
+            alert(randomTip);
+        }
+
+        // Auto-scroll animation for cards
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.safety-card');
+            cards.forEach(card => {
+                const cardTop = card.offsetTop;
+                const cardHeight = card.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollTop = window.scrollY;
+                
+                if (scrollTop > cardTop - windowHeight + cardHeight / 2) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

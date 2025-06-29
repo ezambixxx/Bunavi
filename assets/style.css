@@ -1,0 +1,839 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Landing Page Style */
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #b2ebf2;
+            padding: 3rem 2rem;
+            flex-wrap: wrap; /* agar responsif */
+        }
+
+        .hero-text {
+            flex: 1 1 50%;
+            min-width: 300px;
+        }
+
+        .hero-text h1 {
+            font-size: 2rem;
+            color: #263238;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .hero-image {
+            flex: 1 1 40%;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 350px; /* ini penting agar tidak kebesaran */
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 2rem;
+            background: #f5f5f5;
+            gap: 2rem;
+        }
+
+        .topics, .articles {
+            flex: 1 1 48%;
+            min-width: 300px;
+        }
+
+        .topics h2, .articles h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #37474f;
+        }
+
+        /* Topik Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Kartu Topik */
+        .card {
+            background: #e1f5fe;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 80px;
+            margin-bottom: 0.5rem;
+            object-fit: contain;
+        }
+
+        .card p {
+            font-weight: bold;
+            color: #00796b;
+            margin: 0;
+        }
+
+        /* Artikel */
+        .article-card img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite linear;
+        }
+        
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+            background: linear-gradient(45deg, rgba(255, 182, 193, 0.3), rgba(255, 218, 185, 0.3));
+        }
+        
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            left: 80%;
+            animation-delay: 7s;
+            background: linear-gradient(45deg, rgba(173, 216, 230, 0.3), rgba(240, 248, 255, 0.3));
+        }
+        
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            left: 50%;
+            animation-delay: 14s;
+            background: linear-gradient(45deg, rgba(255, 192, 203, 0.3), rgba(255, 240, 245, 0.3));
+        }
+        
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            left: 25%;
+            animation-delay: 3s;
+            background: linear-gradient(45deg, rgba(176, 224, 230, 0.3), rgba(230, 250, 250, 0.3));
+        }
+        
+        .shape:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            left: 70%;
+            animation-delay: 10s;
+            background: linear-gradient(45deg, rgba(255, 228, 225, 0.3), rgba(255, 245, 238, 0.3));
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .wave-animation {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E") repeat-x;
+            animation: wave 15s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-50px);
+            }
+        }
+        
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5f2d;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #4a90a4;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #4a90a4, #5ba3b7);
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(74, 144, 164, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header-text {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .header-image {
+            flex: 0 0 300px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-left: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .header-image:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .header-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 13px;
+        }
+        
+        .header-image-placeholder {
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .header-image-placeholder::before {
+            content: '👩‍⚕️';
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .pregnancy-timeline {
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-header h2 {
+            color: #2c5f2d;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-container {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(to right, #ff9a9e, #fecfef, #fecfef);
+            border-radius: 2px;
+            z-index: 1;
+        }
+        
+        .trimester {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            min-width: 150px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .trimester:hover {
+            transform: translateY(-5px);
+        }
+        
+        .trimester-image {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px dashed #dee2e6;
+            transition: all 0.3s ease;
+        }
+        
+        .trimester-image:hover {
+            border-color: #4a90a4;
+        }
+        
+        .trimester-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .trimester-placeholder {
+            color: #6c757d;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        
+        .trimester-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .trimester-1 .trimester-circle {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        }
+        
+        .trimester-2 .trimester-circle {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+        }
+        
+        .trimester-3 .trimester-circle {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+        }
+        
+        .trimester h3 {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .trimester p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .topic-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4a90a4, #5ba3b7);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .topic-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        /* Image slot for topic cards */
+        .topic-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border: 2px dashed #dee2e6;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-image:hover {
+            border-color: #4a90a4;
+            background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
+        }
+        
+        .topic-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .image-placeholder {
+            color: #6c757d;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .image-placeholder::before {
+            content: '🖼️';
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            background: linear-gradient(135deg, #4a90a4, #5ba3b7);
+        }
+        
+        .topic-card h3 {
+            color: #2c5f2d;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .topic-card p {
+            color: #666;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4a90a4, #5ba3b7);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #4a90a4, #5ba3b7);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 164, 0.4);
+        }
+        
+        .interactive-quiz {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quiz-bg-decoration {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #4a90a4, #5ba3b7);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: bounce 3s ease-in-out infinite;
+        }
+        
+        .quiz-image {
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #dee2e6;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-image:hover {
+            border-color: #4a90a4;
+        }
+        
+        .quiz-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .quiz-image-placeholder {
+            color: #6c757d;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        
+        .quiz-image-placeholder::before {
+            content: '🧠';
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-question {
+            display: none;
+            text-align: center;
+        }
+        
+        .quiz-question.active {
+            display: block;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .quiz-option {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            border-color: #4a90a4;
+            background: #e3f2fd;
+        }
+        
+        .quiz-option.selected {
+            border-color: #4a90a4;
+            background: #e3f2fd;
+        }
+        
+        .floating-tips {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 250px;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .tip-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .tip-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ffd54f, #ffb74d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .tip-content {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-text {
+                text-align: center;
+            }
+            
+            .header-image {
+                flex: none;
+                width: 100%;
+                max-width: 300px;
+                margin: 2rem auto 0;
+            }
+            
+            .timeline-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .timeline-line {
+                display: none;
+            }
+            
+            .trimester {
+                min-width: auto;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .floating-tips {
+                position: static;
+                width: 100%;
+                margin-bottom: 2rem;
+                transform: none;
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Imunisasi - BUNAVI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #E8F4FD 0%, #B8E6FF 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #2c5aa0;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .vaccine-timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline-header h2 {
+            color: #2c5aa0;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .age-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .age-btn {
+            padding: 12px 20px;
+            border: 2px solid #4a90a4;
+            background: white;
+            color: #4a90a4;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .age-btn:hover, .age-btn.active {
+            background: #4a90a4;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 144, 164, 0.3);
+        }
+
+        .vaccine-info {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .vaccine-info.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .vaccine-card {
+            background: linear-gradient(135deg, #4a90a4 0%, #2c5aa0 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vaccine-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .vaccine-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .vaccine-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .vaccine-benefits {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .interactive-quizim {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .quiz-headerim {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .quiz-headerim h2 {
+            color: #2c5aa0;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .quiz-questionim {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #4a90a4;
+        }
+
+        .quiz-optionsim {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quiz-optionim {
+            padding: 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .quiz-optionim:hover {
+            border-color: #4a90a4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .quiz-optionim.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .quiz-optionim.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .myth-buster {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .myth-card {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .myth-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .myth-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .myth-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .myth-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fun-facts {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .fact-card {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fact-card::before {
+            content: '💡';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .baby-illustration {
+            text-align: center;
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .section-title {
+            color: #2c5aa0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .age-selector {
+                gap: 5px;
+            }
+            
+            .age-btn {
+                min-width: 100px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar loading">
+    <div class="logo">BUNAVI</div>
+    <ul class="nav-links">
+        <!-- Beranda -->
+        <li class="nav-item">
+            <a href="Perawatan_bayi.html" class="active">Menu Sebelumnya</a>
+        </li>
+    </nav>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>🛡️ Edukasi Imunisasi</h1>
+            <p>Lindungi si kecil dengan imunisasi lengkap sesuai jadwal</p>
+            <div class="baby-illustration">👶</div>
+        </div>
+
+        <!-- Jadwal Imunisasi Timeline -->
+        <div class="vaccine-timeline">
+            <div class="timeline-header">
+                <h2>📅 Jadwal Imunisasi Berdasarkan Usia</h2>
+                <p>Klik usia untuk melihat detail imunisasi yang dibutuhkan</p>
+            </div>
+            
+            <div class="age-selector">
+                <button class="age-btn active" onclick="showVaccineInfo('newborn')">0-2 Bulan</button>
+                <button class="age-btn" onclick="showVaccineInfo('infant1')">3-4 Bulan</button>
+                <button class="age-btn" onclick="showVaccineInfo('infant2')">5-6 Bulan</button>
+                <button class="age-btn" onclick="showVaccineInfo('infant3')">9 Bulan</button>
+                <button class="age-btn" onclick="showVaccineInfo('toddler')">12-15 Bulan</button>
+                <button class="age-btn" onclick="showVaccineInfo('preschool')">18-24 Bulan</button>
+            </div>
+
+            <!-- Vaccine Information Cards -->
+            <div id="newborn" class="vaccine-info active">
+                <div class="vaccine-card">
+                    <div class="vaccine-name">🍼 Hepatitis B & BCG</div>
+                    <div class="vaccine-description">
+                        Imunisasi pertama yang penting untuk melindungi bayi baru lahir dari infeksi hepatitis B dan tuberkulosis.
+                    </div>
+                    <div class="vaccine-benefits">
+                        <strong>💪 Manfaat:</strong> Melindungi dari kerusakan hati dan infeksi paru-paru yang berbahaya
+                    </div>
+                </div>
+            </div>
+
+            <div id="infant1" class="vaccine-info">
+                <div class="vaccine-card">
+                    <div class="vaccine-name">💉 DPT-HB-Hib & Polio</div>
+                    <div class="vaccine-description">
+                        Kombinasi vaksin yang melindungi dari 6 penyakit sekaligus: difteri, pertusis, tetanus, hepatitis B, Haemophilus influenzae, dan polio.
+                    </div>
+                    <div class="vaccine-benefits">
+                        <strong>🛡️ Manfaat:</strong> Perlindungan menyeluruh dari penyakit yang dapat menyebabkan kelumpuhan dan kematian
+                    </div>
+                </div>
+            </div>
+
+            <div id="infant2" class="vaccine-info">
+                <div class="vaccine-card">
+                    <div class="vaccine-name">🔄 DPT-HB-Hib & Polio (Lanjutan)</div>
+                    <div class="vaccine-description">
+                        Pemberian ulang untuk memperkuat sistem kekebalan tubuh dan memastikan perlindungan optimal.
+                    </div>
+                    <div class="vaccine-benefits">
+                        <strong>⚡ Manfaat:</strong> Memperkuat antibodi dan memberikan perlindungan jangka panjang
+                    </div>
+                </div>
+            </div>
+
+            <div id="infant3" class="vaccine-info">
+                <div class="vaccine-card">
+                    <div class="vaccine-name">🦠 Campak</div>
+                    <div class="vaccine-description">
+                        Vaksin campak untuk melindungi anak dari penyakit campak yang sangat menular dan berbahaya.
+                    </div>
+                    <div class="vaccine-benefits">
+                        <strong>🌟 Manfaat:</strong> Mencegah komplikasi serius seperti pneumonia dan ensefalitis
+                    </div>
+                </div>
+            </div>
+
+            <div id="toddler" class="vaccine-info">
+                <div class="vaccine-card">
+                    <div class="vaccine-name">🎯 MMR & DPT-HB-Hib</div>
+                    <div class="vaccine-description">
+                        Vaksin MMR (campak, gondongan, rubella) dan booster DPT untuk memperkuat kekebalan.
+                    </div>
+                    <div class="vaccine-benefits">
+                        <strong>🚀 Manfaat:</strong> Perlindungan triple dari campak, gondongan, dan rubella plus penguatan imunitas
+                    </div>
+                </div>
+            </div>
+
+            <div id="preschool" class="vaccine-info">
+                <div class="vaccine-card">
+                    <div class="vaccine-name">🔒 DPT & Campak (Booster)</div>
+                    <div class="vaccine-description">
+                        Vaksin penguat untuk memastikan perlindungan tetap optimal hingga anak memasuki usia sekolah.
+                    </div>
+                    <div class="vaccine-benefits">
+                        <strong>🎓 Manfaat:</strong> Persiapan imunitas kuat sebelum masuk lingkungan sekolah
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Quiz -->
+        <div class="interactive-quizim">
+            <div class="quiz-header">
+                <h2>🧠 Kuis Interaktif</h2>
+                <p>Uji pengetahuan Anda tentang imunisasi!</p>
+            </div>
+            
+            <div class="quiz-questionim">
+                <h3>❓ Kapan waktu terbaik untuk memberikan imunisasi Hepatitis B pertama?</h3>
+                <div class="quiz-optionsim">
+                    <div class="quiz-optionim" onclick="checkAnswer(this, false)">Setelah 1 minggu lahir</div>
+                    <div class="quiz-optionim" onclick="checkAnswer(this, true)">Dalam 24 jam setelah lahir</div>
+                    <div class="quiz-optionim" onclick="checkAnswer(this, false)">Setelah 1 bulan</div>
+                    <div class="quiz-optionim" onclick="checkAnswer(this, false)">Kapan saja</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Myth Buster -->
+        <div class="myth-buster">
+            <h2 class="section-title">🚫 Mitos vs Fakta Imunisasi</h2>
+            
+            <div class="myth-card" onclick="toggleMyth(this)">
+                <div class="myth-title">
+                    ❌ MITOS: "Imunisasi menyebabkan autisme"
+                </div>
+                <div class="myth-content">
+                    <strong>✅ FAKTA:</strong> Tidak ada hubungan antara imunisasi dengan autisme. Penelitian besar-besaran telah membuktikan bahwa vaksin aman dan tidak menyebabkan autisme.
+                </div>
+            </div>
+
+            <div class="myth-card" onclick="toggleMyth(this)">
+                <div class="myth-title">
+                    ❌ MITOS: "Imunisasi melemahkan sistem imun"
+                </div>
+                <div class="myth-content">
+                    <strong>✅ FAKTA:</strong> Imunisasi justru memperkuat sistem imun dengan melatih tubuh mengenali dan melawan penyakit berbahaya.
+                </div>
+            </div>
+
+            <div class="myth-card" onclick="toggleMyth(this)">
+                <div class="myth-title">
+                    ❌ MITOS: "Anak yang diberi ASI tidak perlu imunisasi"
+                </div>
+                <div class="myth-content">
+                    <strong>✅ FAKTA:</strong> Meskipun ASI memberikan antibodi, imunisasi tetap diperlukan untuk perlindungan optimal dari penyakit serius.
+                </div>
+            </div>
+        </div>
+
+        <!-- Fun Facts -->
+        <div class="fun-facts">
+            <h2 class="section-title">🌟 Fakta Menarik Imunisasi</h2>
+            
+            <div class="fact-card">
+                <h3>Tahukah Anda?</h3>
+                <p>Imunisasi telah menyelamatkan lebih dari 2-3 juta nyawa setiap tahunnya di seluruh dunia!</p>
+            </div>
+
+            <div class="fact-card">
+                <h3>Pencapaian Luar Biasa!</h3>
+                <p>Berkat imunisasi, penyakit cacar air berhasil diberantas dari seluruh dunia pada tahun 1980.</p>
+            </div>
+
+            <div class="fact-card">
+                <h3>Perlindungan Komunitas</h3>
+                <p>Ketika 95% populasi diimunisasi, seluruh komunitas terlindungi melalui "herd immunity".</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showVaccineInfo(ageGroup) {
+            // Hide all vaccine info
+            const allVaccineInfo = document.querySelectorAll('.vaccine-info');
+            allVaccineInfo.forEach(info => {
+                info.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const allButtons = document.querySelectorAll('.age-btn');
+            allButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected vaccine info
+            const selectedInfo = document.getElementById(ageGroup);
+            if (selectedInfo) {
+                setTimeout(() => {
+                    selectedInfo.classList.add('active');
+                }, 100);
+            }
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Remove previous answers
+            const allOptions = element.parentNode.querySelectorAll('.quiz-option');
+            allOptions.forEach(option => {
+                option.classList.remove('correct', 'wrong');
+            });
+
+            // Show correct answer
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('wrong');
+                // Show the correct answer
+                allOptions.forEach(option => {
+                    if (option.onclick.toString().includes('true')) {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+        }
+
+        function toggleMyth(element) {
+            const content = element.querySelector('.myth-content');
+            const isActive = content.classList.contains('active');
+            
+            // Close all other myths
+            const allMythContents = document.querySelectorAll('.myth-content');
+            allMythContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Toggle current myth
+            if (!isActive) {
+                content.classList.add('active');
+            }
+        }
+
+        // Add floating animation to baby illustration
+        document.addEventListener('DOMContentLoaded', function() {
+            const baby = document.querySelector('.baby-illustration');
+            if (baby) {
+                baby.style.cursor = 'pointer';
+                baby.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.2) rotate(10deg)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1) rotate(0deg)';
+                    }, 300);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

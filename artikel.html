@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>BUNAVI - Artikel & Tips</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #82b7e3 30%, #0780dc 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0.6;
+            animation: floatRandom 8s infinite ease-in-out;
+        }
+
+        .floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .floating-icon:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+        .floating-icon:nth-child(4) { top: 40%; right: 30%; animation-delay: 6s; }
+
+        @keyframes floatRandom {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-10px) rotate(-3deg); }
+            75% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+
+        /* Main Content */
+        .main-container {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #4a90a4, #4CAF50, #66BB6A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Article Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #82b7e3 30%, #0780dc 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .article-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .article-card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .article-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #4CAF50;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #2196F3;
+        }
+
+
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tip-item {
+            background: linear-gradient(135deg, #4c83c1 0%, #4c83c1 30%, #4c83c1 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;    
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .tip-number {
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .main-container {
+                padding: 1rem;
+                margin-top: 120px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-article {
+                padding: 2rem;
+            }
+
+            .hero-section {
+                padding: 60px 15px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 30s infinite linear;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar loading">
+        <a href="index.html" class="logo">BUNAVI</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="artikel.html" style="color: #4CAF50;">Artikel</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-section" id="home">
+        <div class="floating-elements">
+            <div class="floating-icon">🍼</div>
+            <div class="floating-icon">👶</div>
+            <div class="floating-icon">🤱</div>
+            <div class="floating-icon">💕</div>
+        </div>
+
+    <div class="main-container">
+        <header class="page-header loading">
+            <h1>📚 Artikel & Tips</h1>
+            <p>Panduan lengkap untuk ibu dan calon ibu dalam merawat kehamilan dan bayi</p>
+        </header>
+
+       
+        <!-- Articles Grid -->
+<div class="articles-grid" id="articlesGrid">
+    <!-- Artikel akan dimuat lewat JavaScript -->
+</div>
+
+    <!-- Modal untuk artikel detail -->
+    <div id="articleModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; padding: 2rem; overflow-y: auto;">
+        <div style="max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 2rem; position: relative;">
+            <button onclick="closeModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: #666;">×</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+
+        const articles = [
+        { title: "10 Tips agar Janin dalam Kandungan Sehat dan Sempurna", link: "https://www.antaranews.com/berita/4849665/10-tips-agar-janin-dalam-kandungan-sehat-dan-sempurna?utm" },
+        { title: "5 Nutrisi Penting Selama Kehamilan agar Ibu Sehat dan Bayi Tumbuh Optimal", link: "https://www.fimela.com/parenting/read/6038253/5-nutrisi-penting-selama-kehamilan-agar-ibu-sehat-dan-bayi-tumbuh-optimal?" },
+        { title: "7 Tips agar Bayi Lahir Sehat", link: "https://patalan.bantulkab.go.id/first/artikel/318-7-TIPS-UNTUK-IBU-HAMIL-AGAR-BAYI-LAHIR-DENGAN-SEHAT" },
+        { title: "Tips Memasuki Trimester 3: Nutrisi & Persiapan Persalinan", link: "https://www.rspondokindah.co.id/en/news/kehamilan-trimester-ketiga-kebutuhan-nutrisi?utm_source=chatgpt.com" },
+        { title: "Tips Mempersiapkan Kehamilan yang Sehat", link: "https://health.kompas.com/read/2022/04/27/060000468/tips-mempersiapkan-kehamilan-yang-sehat" },
+        { title: "Cara Aman Konsumsi Salmon Asap untuk Ibu Hamil", link: "https://lifestyle.kompas.com/read/2023/08/30/180138120/cara-aman-konsumsi-salmon-asap-untuk-ibu-hamil" },
+        { title: "4 Tips Puasa untuk Ibu Hamil agar Bayi Tetap Sehat", link: "https://lifestyle.kompas.com/read/2021/04/13/111153320/4-tips-puasa-untuk-ibu-hamil-agar-bayi-tetap-sehat" },
+        { title: "Dokter Beri Pilihan Sehat untuk Ibu Hamil yang Ngidam", link: "https://lifestyle.kompas.com/read/2021/04/13/111153320/4-tips-puasa-untuk-ibu-hamil-agar-bayi-tetap-sehat" },
+        { title: "Makanan Ibu Hamil agar Bayi Lahir Rambut Tebal", link: "https://lifestyle.kompas.com/read/2022/02/23/140000420/4-makanan-ibu-hamil-agar-bayi-lahir-dengan-rambut-tebal" },
+        { title: "7 Rekomendasi Makanan Ibu Hamil dengan Gizi Lengkap", link: "https://health.grid.id/read/354139454/ini-dia-7-rekomendasi-makanan-ibu-hamil-dengan-gizi-lengkap" },
+        { title: "Gizi Optimal untuk Ibu Hamil – Kunci Bayi yang Kuat", link: "https://puskesmasmeninting-dikes.lombokbaratkab.go.id/artikel/gizi-optimal-untuk-ibu-hamil-kunci-bayi-yang-kuat" },
+        { title: "Pernah Ada Aneka Ngidam “Aneh” Ibu Hamil", link: "https://puskesmasmeninting-dikes.lombokbaratkab.go.id/artikel/gizi-optimal-untuk-ibu-hamil-kunci-bayi-yang-kuat" },
+        { title: "Mengenal Tingkeban, Tradisi Sunda untuk Ibu Hamil", link: "https://www.detik.com/jabar/budaya/d-6278187/mengenal-tingkeban-tradisi-sunda-untuk-ibu-hamil" },
+        { title: "Panduan Singkat Perawatan Bayi Baru Lahir", link: "https://health.kompas.com/read/2022/05/22/060000968/panduan-singkat-untuk-perawatan-bayi-baru-lahir" },
+        { title: "Bun, Jangan Cium Bibir Bayi yang Belum Punya Gigi Ya", link: "https://health.kompas.com/read/2022/05/22/060000968/panduan-singkat-untuk-perawatan-bayi-baru-lahir" }
+    ];
+
+    const grid = document.getElementById('articlesGrid');
+    let startIndex = 0;
+
+    function renderArticles() {
+        grid.innerHTML = '';
+
+        for (let i = 0; i < 6; i++) {
+            let index = (startIndex + i) % articles.length;
+            const article = articles[index];
+
+            const card = document.createElement('article');
+            card.className = 'article-card loading';
+            card.innerHTML = `
+                <div class="article-icon">📰</div>
+                <h3>${article.title}</h3>
+                <a href="#" class="read-more" onclick="openInModal(event, '${article.link}')">Baca Selengkapnya →</a>
+            `;
+            grid.appendChild(card);
+        }
+        setTimeout(() => {
+        document.querySelectorAll('.article-card').forEach(el => {
+            el.classList.add('fade-in');
+        });
+    }, 100);
+
+    }
+
+    function openInModal(event, url) {
+        event.preventDefault();
+        const modal = document.getElementById('articleModal');
+        const content = document.getElementById('modalContent');
+        content.innerHTML = `<iframe src="${url}" style="width:100%;height:80vh;border:none;"></iframe>`;
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('articleModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function autoScroll() {
+        if (articles.length <= 6) return;
+        startIndex = (startIndex + 1) % articles.length;
+        renderArticles();
+    }
+
+    setInterval(autoScroll, 5000);
+    window.onload = renderArticles;
+
+    // Animation on load
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            document.querySelectorAll('.loading').forEach(el => {
+                el.classList.add('fade-in');
+            });
+        }, 100);
+
+        // Add floating animation to article icons
+        document.querySelectorAll('.article-icon').forEach(icon => {
+            icon.classList.add('floating');
+        });
+    });
+
+        let completedTopics = 0;
+        let visitedTopics = new Set();
+
+        // Animation counters
+        function animateCounter(elementId, target, duration = 2000) {
+            const element = document.getElementById(elementId);
+            const start = 0;
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + (target - start) * progress);
+                
+                if (elementId === 'completionRate') {
+                    element.textContent = current + '%';
+                } else if (elementId === 'happyParents') {
+                    element.textContent = current + '+';
+                } else {
+                    element.textContent = current;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Initialize animations when page loads
+        window.addEventListener('load', () => {
+            animateCounter('happyParents', 1000);
+            animateCounter('completionRate', 98);
+        });
+
+    </script>
+</body>
+</html>

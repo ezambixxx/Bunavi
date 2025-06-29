@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Pola Tidur Bayi - BUNAVI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d1ecf1 100%);
+            min-height: 100vh;
+            color: #2c5f5f;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c5f5f;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #2c5f5f;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #5a9ea0;
+        }
+
+        .profile-btn {
+            background: #5a9ea0;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .profile-btn:hover {
+            background: #4a8e90;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title h1 {
+            color: #5a9ea0;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .page-title p {
+            font-size: 1.1rem;
+            color: #5a9ea0;
+        }
+
+        .age-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .age-btn {
+            background: white;
+            border: 2px solid #5a9ea0;
+            color: #5a9ea0;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .age-btn.active,
+        .age-btn:hover {
+            background: #5a9ea0;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(90, 158, 160, 0.3);
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .sleep-chart {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sleep-visual {
+            flex: 1;
+            position: relative;
+            height: 200px;
+            background: linear-gradient(90deg, #ffd700 0%, #87ceeb 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .moon {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 50px;
+            height: 50px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            transition: all 0.5s;
+        }
+
+        .sun {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            width: 50px;
+            height: 50px;
+            background: #ffd700;
+            border-radius: 50%;
+            transition: all 0.5s;
+        }
+
+        .sleep-info {
+            flex: 1;
+            padding-left: 2rem;
+        }
+
+        .sleep-hours {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #5a9ea0;
+            margin-bottom: 0.5rem;
+        }
+
+        .sleep-desc {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #f8fbff 0%, #e8f4f8 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 5px solid #5a9ea0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tip-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(90, 158, 160, 0.2);
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .tip-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c5f5f;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .interactive-timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-header h3 {
+            color: #2c5f5f;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 0 1rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #5a9ea0 0%, #87ceeb 100%);
+            border-radius: 2px;
+        }
+
+        .timeline-point {
+            background: white;
+            border: 4px solid #5a9ea0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-point:hover,
+        .timeline-point.active {
+            transform: scale(1.2);
+            border-color: #2c5f5f;
+            box-shadow: 0 0 20px rgba(90, 158, 160, 0.5);
+        }
+
+        .timeline-label {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: #5a9ea0;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .myth-buster {
+            background: linear-gradient(135deg, #ffe8e8 0%, #fff0f0 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid #ffb3b3;
+        }
+
+        .myth-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .myth-icon {
+            font-size: 2rem;
+        }
+
+        .myth-title {
+            color: #d63384;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .myth-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .myth-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .myth-question {
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 0.5rem;
+        }
+
+        .myth-answer {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .floating-baby {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: #5a9ea0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 5px 20px rgba(90, 158, 160, 0.4);
+            z-index: 1000;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #5a9ea0 0%, #87ceeb 100%);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav {
+                gap: 1rem;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            .sleep-chart {
+                flex-direction: column;
+            }
+
+            .sleep-info {
+                padding-left: 0;
+                text-align: center;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .timeline::before {
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: 4px;
+                height: auto;
+            }
+
+            .timeline-label {
+                top: auto;
+                left: 60px;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar loading">
+    <div class="logo">BUNAVI</div>
+    <ul class="nav-links">
+        <!-- Beranda -->
+        <li class="nav-item">
+            <a href="Perawatan_bayi.html" class="active">Menu Sebelumnya</a>
+        </li>
+    </nav>
+
+    <div class="container">
+        <div class="page-title">
+            <h1>Pola Tidur Bayi</h1>
+            <p>Memahami kebutuhan tidur bayi untuk tumbuh kembang optimal</p>
+        </div>
+
+        <div class="age-selector">
+            <button class="age-btn active" onclick="selectAge('0-3')">0-3 Bulan</button>
+            <button class="age-btn" onclick="selectAge('3-6')">3-6 Bulan</button>
+            <button class="age-btn" onclick="selectAge('6-12')">6-12 Bulan</button>
+            <button class="age-btn" onclick="selectAge('12+')">12+ Bulan</button>
+        </div>
+
+        <div class="content-section">
+            <div class="sleep-chart">
+                <div class="sleep-visual" onclick="animateSleepCycle()">
+                    <div class="sun" id="sun"></div>
+                    <div class="moon" id="moon"></div>
+                </div>
+                <div class="sleep-info">
+                    <div class="sleep-hours" id="sleepHours">14-17</div>
+                    <div class="sleep-desc" id="sleepDesc">
+                        jam tidur per hari untuk bayi usia 0-3 bulan. Bayi baru lahir membutuhkan waktu tidur yang banyak untuk mendukung pertumbuhan otak dan tubuh yang pesat.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 85%"></div>
+            </div>
+        </div>
+
+        <div class="interactive-timeline">
+            <div class="timeline-header">
+                <h3>Pola Tidur Sepanjang Hari</h3>
+                <p>Klik pada titik waktu untuk melihat detail</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-point active" onclick="showTimeInfo('06:00')">
+                    <div class="timeline-label">06:00</div>
+                </div>
+                <div class="timeline-point" onclick="showTimeInfo('12:00')">
+                    <div class="timeline-label">12:00</div>
+                </div>
+                <div class="timeline-point" onclick="showTimeInfo('18:00')">
+                    <div class="timeline-label">18:00</div>
+                </div>
+                <div class="timeline-point" onclick="showTimeInfo('22:00')">
+                    <div class="timeline-label">22:00</div>
+                </div>
+            </div>
+            <div id="timeInfo" style="margin-top: 2rem; padding: 1rem; background: #f8fbff; border-radius: 10px;">
+                <h4 style="color: #2c5f5f;">🌅 Pagi (06:00)</h4>
+                <p>Waktu bangun alami untuk bayi. Mulai rutinitas harian dengan menyusui dan aktivitas ringan.</p>
+            </div>
+        </div>
+
+        <div class="tips-grid">
+            <div class="tip-card" onclick="expandTip(this)">
+                <div class="tip-icon">🛏️</div>
+                <div class="tip-title">Ciptakan Lingkungan Tidur</div>
+                <div class="tip-content">
+                    Ruangan yang tenang, gelap, dan bersuhu sejuk (18-21°C) membantu bayi tidur lebih nyenyak.
+                </div>
+            </div>
+            
+            <div class="tip-card" onclick="expandTip(this)">
+                <div class="tip-icon">🕐</div>
+                <div class="tip-title">Konsistensi Rutinitas</div>
+                <div class="tip-content">
+                    Buat rutinitas tidur yang sama setiap hari: mandi, pijat lembut, lalu menyusui sebelum tidur.
+                </div>
+            </div>
+            
+            <div class="tip-card" onclick="expandTip(this)">
+                <div class="tip-icon">👶</div>
+                <div class="tip-title">Posisi Tidur Aman</div>
+                <div class="tip-content">
+                    Selalu letakkan bayi dalam posisi terlentang untuk mengurangi risiko SIDS (Sudden Infant Death Syndrome).
+                </div>
+            </div>
+            
+            <div class="tip-card" onclick="expandTip(this)">
+                <div class="tip-icon">🤱</div>
+                <div class="tip-title">Bedakan Siang dan Malam</div>
+                <div class="tip-content">
+                    Pada siang hari, biarkan cahaya terang dan suara normal. Malam hari, redupkan lampu dan jaga ketenangan.
+                </div>
+            </div>
+        </div>
+
+        <div class="myth-buster">
+            <div class="myth-header">
+                <div class="myth-icon">🚫</div>
+                <div class="myth-title">Mitos vs Fakta Tidur Bayi</div>
+            </div>
+            
+            <div class="myth-item" onclick="toggleMyth(this)">
+                <div class="myth-question">❌ "Bayi harus tidur dalam posisi tengkurap agar tidak tersedak"</div>
+                <div class="myth-answer">✅ FAKTA: Posisi terlentang adalah yang paling aman. Bayi memiliki refleks alami untuk mengeluarkan cairan dari mulut.</div>
+            </div>
+            
+            <div class="myth-item" onclick="toggleMyth(this)">
+                <div class="myth-question">❌ "Membiarkan bayi menangis akan melatih kemandirian"</div>
+                <div class="myth-answer">✅ FAKTA: Bayi menangis untuk berkomunikasi. Merespons kebutuhan bayi justru membangun rasa aman dan kepercayaan.</div>
+            </div>
+            
+            <div class="myth-item" onclick="toggleMyth(this)">
+                <div class="myth-question">❌ "Bayi yang tidur siang akan sulit tidur malam"</div>
+                <div class="myth-answer">✅ FAKTA: Tidur siang yang cukup justru membantu bayi tidur lebih baik di malam hari. Bayi yang terlalu lelah malah sulit tidur.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-baby" onclick="scrollToTop()">
+        👶
+    </div>
+
+    <script>
+        const ageData = {
+            '0-3': {
+                hours: '14-17',
+                desc: 'jam tidur per hari untuk bayi usia 0-3 bulan. Bayi baru lahir membutuhkan waktu tidur yang banyak untuk mendukung pertumbuhan otak dan tubuh yang pesat.',
+                progress: 85
+            },
+            '3-6': {
+                hours: '12-15',
+                desc: 'jam tidur per hari untuk bayi usia 3-6 bulan. Pola tidur mulai lebih teratur dengan tidur malam yang lebih panjang.',
+                progress: 75
+            },
+            '6-12': {
+                hours: '11-14',
+                desc: 'jam tidur per hari untuk bayi usia 6-12 bulan. Mulai bisa tidur sepanjang malam dengan 1-2 kali tidur siang.',
+                progress: 65
+            },
+            '12+': {
+                hours: '10-13',
+                desc: 'jam tidur per hari untuk balita di atas 12 bulan. Pola tidur semakin mirip dengan orang dewasa.',
+                progress: 55
+            }
+        };
+
+        const timeInfoData = {
+            '06:00': {
+                title: '🌅 Pagi (06:00)',
+                content: 'Waktu bangun alami untuk bayi. Mulai rutinitas harian dengan menyusui dan aktivitas ringan.'
+            },
+            '12:00': {
+                title: '☀️ Siang (12:00)',
+                content: 'Waktu tidur siang pertama. Pastikan ruangan tidak terlalu gelap agar bayi tahu ini bukan waktu tidur malam.'
+            },
+            '18:00': {
+                title: '🌆 Sore (18:00)',
+                content: 'Mulai rutinitas malam: mandi, pijat lembut, dan suasana yang lebih tenang untuk mempersiapkan tidur malam.'
+            },
+            '22:00': {
+                title: '🌙 Malam (22:00)',
+                content: 'Waktu tidur malam. Ruangan gelap, tenang, dan suhu sejuk untuk tidur yang nyenyak sepanjang malam.'
+            }
+        };
+
+        function selectAge(age) {
+            // Update button states
+            document.querySelectorAll('.age-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update content
+            const data = ageData[age];
+            document.getElementById('sleepHours').textContent = data.hours;
+            document.getElementById('sleepDesc').textContent = data.desc;
+            document.getElementById('progressFill').style.width = data.progress + '%';
+        }
+
+        function animateSleepCycle() {
+            const sun = document.getElementById('sun');
+            const moon = document.getElementById('moon');
+            
+            sun.style.transform = 'translateX(300px)';
+            moon.style.transform = 'translateX(-300px)';
+            
+            setTimeout(() => {
+                sun.style.transform = 'translateX(0)';
+                moon.style.transform = 'translateX(0)';
+            }, 2000);
+        }
+
+        function showTimeInfo(time) {
+            // Update timeline points
+            document.querySelectorAll('.timeline-point').forEach(point => {
+                point.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update info content
+            const info = timeInfoData[time];
+            document.getElementById('timeInfo').innerHTML = `
+                <h4 style="color: #2c5f5f;">${info.title}</h4>
+                <p>${info.content}</p>
+            `;
+        }
+
+        function expandTip(element) {
+            element.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                element.style.transform = 'translateX(10px)';
+            }, 200);
+        }
+
+        function toggleMyth(element) {
+            const answer = element.querySelector('.myth-answer');
+            if (answer.style.display === 'none' || !answer.style.display) {
+                answer.style.display = 'block';
+                element.style.background = '#fff5f5';
+            } else {
+                answer.style.display = 'none';
+                element.style.background = 'white';
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Initialize myth answers as hidden
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.myth-answer').forEach(answer => {
+                answer.style.display = 'none';
+            });
+        });
+
+        // Add smooth scrolling animation on load
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

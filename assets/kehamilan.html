@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BUNAVI - Edukasi Kehamilan</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="wave-animation"></div>
+    </div>
+
+    <!-- Navigasi -->
+    <nav class="navbar">
+        <div class="logo">BUNAVI</div>
+        <ul class="nav-links">
+            <li><a href="#">Beranda</a></li>
+            <li><a href="#">Materi</a></li>
+            <li><a href="#" class="active">Profil</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="page-header fade-in">
+            <div class="page-header-content">
+                <div class="header-text">
+                    <h1>🤱 Edukasi Kehamilan</h1>
+                    <p>Panduan lengkap untuk perjalanan kehamilan yang sehat dan bahagia</p>
+                </div>
+                <div class="header-image">
+                    <div class="header-image-placeholder">
+                        <img src="assets/mother.png" alt="mom">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Kehamilan -->
+        <div class="pregnancy-timeline fade-in">
+            <div class="timeline-header">
+                <h2>Perjalanan Kehamilan Anda</h2>
+                <p>Klik setiap trimester untuk mempelajari lebih lanjut</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="trimester trimester-1" onclick="selectTrimester(1)">
+                    <div class="trimester-image">
+                        <img src="assets/trimester1.png" alt="Trimester 1">
+                    </div>
+                    <div class="trimester-circle">🌱</div>
+                    <h3>Trimester 1</h3>
+                    <p>0–12 minggu</p>
+                </div>
+                <div class="trimester trimester-2" onclick="selectTrimester(2)">
+                    <div class="trimester-image">
+                        <img src="assets/trimester2.png" alt="Trimester 2">
+                    </div>
+                    <div class="trimester-circle">🤰</div>
+                    <h3>Trimester 2</h3>
+                    <p>13–27 minggu</p>
+                </div>
+                <div class="trimester trimester-3" onclick="selectTrimester(3)">
+                    <div class="trimester-image">
+                        <img src="assets/trimester3.png" alt="Trimester 3">
+                    </div>
+                    <div class="trimester-circle">👶</div>
+                    <h3>Trimester 3</h3>
+                    <p>28–40 minggu</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topik Edukasi -->
+        <div class="topics-grid">
+            <div class="topic-card fade-in" onclick="openTopic('nutrition')">
+                <div class="topic-image">
+                    <img src="assets/nutrisi.png" alt="Kehamilan">
+                </div>
+                <div class="topic-icon">🥗</div>
+                <h3>Nutrisi Kehamilan</h3>
+                <p>Panduan lengkap makanan sehat untuk ibu hamil dan perkembangan janin optimal</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <a href="#" class="btn">Mulai Belajar</a>
+            </div>
+
+            <div class="topic-card fade-in" onclick="openTopic('exercise')">
+                <div class="topic-image">
+                    <img src="assets/olahraga.png" alt="Olahraga">
+                </div>
+                <div class="topic-icon">🧘</div>
+                <h3>Olahraga & Aktivitas</h3>
+                <p>Latihan aman dan bermanfaat selama kehamilan untuk kesehatan ibu dan bayi</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <a href="#" class="btn">Mulai Belajar</a>
+            </div>
+
+            <div class="topic-card fade-in" onclick="openTopic('prenatal')">
+                <div class="topic-image">
+                    <img src="assets/prenata.png" alt="Prenatal">
+                </div>
+                <div class="topic-icon">🏥</div>
+                <h3>Pemeriksaan Prenatal</h3>
+                <p>Jadwal dan pentingnya pemeriksaan rutin selama masa kehamilan</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <a href="#" class="btn">Mulai Belajar</a>
+            </div>
+
+            <div class="topic-card fade-in" onclick="openTopic('symptoms')">
+                <div class="topic-image">
+                    <img src="assets/gejala.png" alt="Gejala">
+                </div>
+                <div class="topic-icon">🩺</div>
+                <h3>Gejala & Perubahan</h3>
+                <p>Memahami perubahan tubuh dan gejala normal selama kehamilan</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <a href="#" class="btn">Mulai Belajar</a>
+            </div>
+
+            <div class="topic-card fade-in" onclick="openTopic('preparation')">
+                <div class="topic-image">
+                    <img src="assets/persiapan.png" alt="Persiapan">
+                </div>
+                <div class="topic-icon">🍼</div>
+                <h3>Persiapan Melahirkan</h3>
+                <p>Panduan lengkap mempersiapkan kelahiran dan perawatan bayi baru lahir</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <a href="#" class="btn">Mulai Belajar</a>
+            </div>
+
+            <div class="topic-card fade-in" onclick="openTopic('mental')">
+                <div class="topic-image">
+                    <img src="assets/mental.png" alt="Mental">
+                </div>
+                <div class="topic-icon">💝</div>
+                <h3>Kesehatan Mental</h3>
+                <p>Menjaga kesehatan mental dan emosional selama masa kehamilan</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <a href="#" class="btn">Mulai Belajar</a>
+            </div>
+        </div>
+
+        <!-- Kuis Interaktif -->
+        <div class="interactive-quiz fade-in">
+            <div class="quiz-bg-decoration"></div>
+            <div class="quiz-header">
+                <div class="quiz-image">
+                    <div class="quiz-image-placeholder">🧠</div>
+                </div>
+                <h2>🧠 Kuis Interaktif</h2>
+                <p>Uji pengetahuan Anda tentang kehamilan</p>
+            </div>
+            <div class="quiz-question active">
+                <h3>Berapa kali sebaiknya ibu hamil makan dalam sehari?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)">3 kali makan besar</div>
+                    <div class="quiz-option" onclick="selectOption(this)">5-6 kali makan kecil</div>
+                    <div class="quiz-option" onclick="selectOption(this)">2 kali makan besar</div>
+                    <div class="quiz-option" onclick="selectOption(this)">Tidak ada aturan khusus</div>
+                </div>
+                <button class="btn" onclick="nextQuestion()">Jawab</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips Harian -->
+    <div class="floating-tips pulse">
+        <div class="tip-header">
+            <div class="tip-icon">💡</div>
+            <h4>Tips Hari Ini</h4>
+        </div>
+        <div class="tip-content">
+            <p><strong>Hidrasi adalah kunci!</strong> Minumlah 8-10 gelas air setiap hari untuk menjaga kesehatan ibu dan janin.</p>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+
+
+<!-- Modal untuk menampilkan materi trimester -->
+<div id="trimesterModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modalContent">
+            <!-- Konten akan diisi oleh JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- CSS untuk Modal -->
+<style>
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 2% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    animation: slideIn 0.4s ease-out;
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 20px 30px 0 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+.trimester-content {
+    padding: 30px;
+    color: white;
+}
+
+.trimester-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.trimester-section {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+.trimester-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.section-title {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::before {
+    content: attr(data-icon);
+    font-size: 1.2em;
+}
+
+.section-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.section-content li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.section-content li:last-child {
+    border-bottom: none;
+}
+
+.section-content li::before {
+    content: "•";
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 2px;
+}
+
+.warning-section {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    border: 2px solid #ff4757;
+}
+
+.danger-section {
+    background: linear-gradient(135deg, #ff9ff3, #f368e0);
+    border: 2px solid #ff3838;
+}
+
+.notes-section {
+    background: linear-gradient(135deg, #54a0ff, #2e86de);
+    border: 2px solid #3742fa;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    .trimester-title {
+        font-size: 2em;
+    }
+    
+    .trimester-content {
+        padding: 20px;
+    }
+}
+</style>
+
+</body>
+
+<script>
+const questions = [
+    {
+        question: "Berapa kali sebaiknya ibu hamil makan dalam sehari?",
+        options: [
+            "3 kali makan besar",
+            "5-6 kali makan kecil",
+            "2 kali makan besar",
+            "Tidak ada aturan khusus"
+        ],
+        answer: 1
+    },
+    {
+        question: "Kapan sebaiknya pemeriksaan kehamilan pertama dilakukan?",
+        options: [
+            "Setelah 2 bulan hamil",
+            "1 minggu setelah terlambat haid",
+            "Menjelang melahirkan",
+            "Setelah 3 bulan"
+        ],
+        answer: 1
+    },
+    {
+        question: "Apa manfaat utama ASI eksklusif selama 6 bulan pertama?",
+        options: [
+            "Membuat bayi cepat lapar",
+            "Menambah berat badan ibu",
+            "Memberikan nutrisi dan antibodi terbaik bagi bayi",
+            "Membuat bayi jarang tidur"
+        ],
+        answer: 2
+    },
+    {
+        question: "Berapa kali minimal ibu hamil harus periksa selama kehamilan?",
+        options: [
+            "3 kali",
+            "4 kali",
+            "6 kali",
+            "8 kali"
+        ],
+        answer: 2
+    },
+    {
+        question: "Kapan janin biasanya mulai terasa gerakannya?",
+        options: [
+            "1 bulan",
+            "3 bulan",
+            "5 bulan",
+            "8 bulan"
+        ],
+        answer: 2
+    },
+    {
+        question: "Tanda bahaya pada trimester 3 meliputi, kecuali:",
+        options: [
+            "Gerakan bayi berkurang",
+            "Ketuban pecah tanpa kontraksi",
+            "Sering buang air kecil",
+            "Perdarahan hebat"
+        ],
+        answer: 2
+    },
+    {
+        question: "Apa manfaat Inisiasi Menyusu Dini (IMD)?",
+        options: [
+            "Agar bayi tidak tidur",
+            "Membantu ikatan ibu-anak & mendorong produksi ASI",
+            "Untuk melihat jenis kelamin",
+            "Untuk membersihkan bayi dari darah"
+        ],
+        answer: 1
+    },
+    {
+        question: "Trimester ke berapa disarankan mulai siapkan rencana persalinan?",
+        options: [
+            "Trimester 1",
+            "Trimester 2",
+            "Trimester 3",
+            "Setelah lahir"
+        ],
+        answer: 1
+    },
+    {
+        question: "Apa yang tidak boleh dilakukan selama hamil?",
+        options: [
+            "Senam kehamilan",
+            "Minum susu ibu hamil",
+            "Minum alkohol",
+            "Kontrol rutin ke bidan"
+        ],
+        answer: 2
+    },
+    {
+        question: "Apa manfaat kelas ibu hamil?",
+        options: [
+            "Untuk olahraga semata",
+            "Untuk mendapatkan hadiah",
+            "Mendapatkan dukungan dan informasi kehamilan",
+            "Agar bisa belanja"
+        ],
+        answer: 2
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function loadQuestion() {
+    const q = questions[currentQuestion];
+    const container = document.querySelector(".quiz-question");
+    const opts = q.options.map((opt, i) => `<div class="quiz-option" onclick="selectOption(this, ${i})">${opt}</div>`).join("");
+    container.innerHTML = `
+        <h3>${q.question}</h3>
+        <div class="quiz-options">${opts}</div>
+        <button class="btn" onclick="nextQuestion()">Jawab</button>
+    `;
+}
+
+function selectOption(el, index) {
+    const options = document.querySelectorAll(".quiz-option");
+    options.forEach(opt => opt.classList.remove("selected"));
+    el.classList.add("selected");
+    el.dataset.selected = index;
+}
+
+function nextQuestion() {
+    const selected = document.querySelector(".quiz-option.selected");
+    if (!selected) return alert("Pilih jawaban dulu ya, Bunda!");
+    const answer = parseInt(selected.dataset.selected);
+    if (answer === questions[currentQuestion].answer) score++;
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+}
+
+function showResult() {
+    const container = document.querySelector(".quiz-question");
+    let message = score >= 8 ? "🎉 Luar biasa! Bunda sangat paham tentang kehamilan!" :
+                 score >= 5 ? "😊 Cukup baik! Tetap lanjut belajar ya, Bunda." :
+                 "😟 Masih perlu belajar lagi, yuk coba ulangi materinya.";
+    container.innerHTML = `
+        <h3>Skor Anda: ${score} dari ${questions.length}</h3>
+        <p>${message}</p>
+        <button class="btn" onclick="restartQuiz()">Ulangi Kuis</button>
+    `;
+}
+
+function restartQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    loadQuestion();
+}
+
+// Load pertanyaan pertama saat halaman dibuka
+document.addEventListener("DOMContentLoaded", loadQuestion);
+</script>
+
+</html>
