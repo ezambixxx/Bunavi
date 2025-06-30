@@ -495,7 +495,7 @@ const suforQuestions = [
         question: "🎯 Mengapa ASI disebut 'makanan hidup'?",
         options: [
             "Karena berasal dari makhluk hidup",
-            "Karena mengandung sel hidup dan antibodi ✓",
+            "Karena mengandung sel hidup dan antibodi",
             "Karena mudah basi",
             "Karena selalu hangat"
         ],
@@ -506,7 +506,7 @@ const suforQuestions = [
         options: [
             "ASI mengandung lebih banyak vitamin",
             "ASI lebih mudah dicerna",
-            "ASI mengandung immunoglobulin dan antibodi alami ✓",
+            "ASI mengandung immunoglobulin dan antibodi alami",
             "ASI selalu dalam suhu yang tepat"
         ],
         answer: 2
@@ -515,7 +515,7 @@ const suforQuestions = [
         question: "💰 Penghematan per bulan dengan ASI eksklusif?",
         options: [
             "Rp 100.000 - 200.000",
-            "Rp 300.000 - 500.000 ✓",
+            "Rp 300.000 - 500.000",
             "Rp 50.000 - 100.000",
             "Tidak ada penghematan signifikan"
         ],
@@ -524,7 +524,7 @@ const suforQuestions = [
     {
         question: "🍼 Kapan susu formula bisa dipertimbangkan?",
         options: [
-            "Ketika ibu memiliki kondisi medis tertentu ✓",
+            "Ketika ibu memiliki kondisi medis tertentu",
             "Ketika bayi sering menangis",
             "Ketika ASI terasa kurang",
             "Ketika bayi berusia 3 bulan"
@@ -537,7 +537,7 @@ const suforQuestions = [
             "ASI berubah warna setiap hari",
             "ASI memiliki rasa yang berbeda-beda",
             "ASI mengandung banyak vitamin",
-            "Komposisi menyesuaikan kebutuhan bayi ✓"
+            "Komposisi menyesuaikan kebutuhan bayi"
         ],
         answer: 3
     }
@@ -659,14 +659,5 @@ document.querySelectorAll('.has-dropdown > a').forEach(link => {
       if (!item.contains(e.target)) {
         item.classList.remove('open');
       }
-    });
-  });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-
-    hamburger.addEventListener('click', function () {
-      navMenu.classList.toggle('active');
     });
   });
