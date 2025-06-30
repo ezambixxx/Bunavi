@@ -226,6 +226,13 @@
             transition: all 0.3s ease;
         }
 
+        .member-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        }
+
         .team-member:hover .member-avatar {
             transform: scale(1.1) rotate(10deg);
         }
@@ -354,7 +361,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4a90a4, #66BB6A);
+            background-color: white;
             margin: 0 auto 1rem;
             display: flex;
             align-items: center;
@@ -467,31 +474,231 @@
             100% { transform: rotate(360deg); }
         }
         
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0; /* tambahkan ini agar menu penuh */
+            align-items: center; /* ini yang bikin center */
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            width: 100%;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 999;
+            animation: slideDown 0.3s ease;
+        }
+
+        .mobile-nav.active {
+        display: flex;
+        }
+
+        .mobile-nav li {
+        list-style: none;
+        width: 90%;
+        }
+
+        .mobile-nav li a {
+        display: block;
+        background: linear-gradient(135deg, #4a90a4, #4CAF50);
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        text-decoration: none;
+        font-weight: 600;
+        color: white; /* Hijau khas BUNAVI */
+        transition: transform 0.2s ease, background 0.2s ease;
+        border: 1px solid #c8e6c9;
+        }
+
+        .mobile-nav li a:hover {
+        background-color: #f1f8e9;
+        transform: scale(1.03);
+        }
+
+        @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        }
+
+        @media (max-width: 768px) {
+        /* TAMPIL DI MOBILE */
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            padding: 1rem;
+            
+        }
+
+        .desktop-only {
+            display: none;
+        }
+        }
+
+        .nav-menu {
+        display: none;
+        }
+
+        .nav-menu.show {
+        display: flex;
+        }
+
+        .hamburger {
+        display: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: black;
+        position: absolute;
+        right: 1rem;
+        top: 0.7rem;
+        z-index: 101;
+        }
+
+        @media (max-width: 768px) {
+        .hamburger {
+            display: block;
+        }
+
+        .desktop-only {
+            display: none;
+        }
+
+            .mobile-nav {
+            display: none;
+            flex-direction: column;
+            background: white;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            z-index: 100;
+            }
+
+            .mobile-nav.active {
+            display: flex;
+            }
+
+        .mobile-nav li a {
+            color: #ffffff;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        }
+
+        .nav-menu.mobile-nav {
+        padding: 10px 15px;
+        }
+
+        .nav-menu.mobile-nav li {
+        list-style: none;
+        margin-bottom: 10px;
+        }
+
+        /* === DROPDOWN MOBILE STYLING YANG LEMBUT === */
+        .has-dropdown-mobile > a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        transition: background 0.3s ease;
+        }
+
+        .has-dropdown-mobile > a:hover {
+        background-color: #f0f0f0;
+        }
+
+        /* Dropdown animasi lembut */
+        .dropdown-mobile {
+        max-height: 0;
+        overflow: hidden;
+        flex-direction: column;
+        padding-left: 10px;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        opacity: 0;
+        margin-left: 16px;
+        }
+
+        .has-dropdown-mobile.active .dropdown-mobile {
+        max-height: 1000px; /* cukup besar untuk semua item */
+        opacity: 1;
+        }
+
+        .dropdown-mobile li a {
+        margin-top: 8px;
+        background-color: #f9f9f9;
+        padding: 10px 14px;
+        border-radius: 6px;
+        color: #ffffff;
+        font-size: 15px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        transition: all 0.3s ease;
+        }
+
+        .dropdown-mobile li a:hover {
+        background-color: #eaeaea;
+        transform: translateX(4px);
+        }
     </style>
 </head>
 
 <body>
     <!-- Navbar tetap from about.html -->
     <nav class="navbar loading">
-        <a href="index.html" class="back-button-mobile">←</a>
         <div class="logo">BUNAVI</div>
+        <div class="hamburger" id="hamburger">☰</div>
+        <a href="index.html" class="back-button-mobile">←</a>
+
         <ul class="nav-links desktop-only">
-            <li class="nav-item"><a href="index.html">Beranda</a></li>
+            <li class="nav-item"><a href="index.html" class="active">Beranda</a></li>
             <li class="nav-item has-dropdown">
-                <a href="#">Materi</a>
-                <div class="dropdown">
-                    <a href="kehamilan.html" class="dropdown-item">📱 Kehamilan</a>
-                    <a href="asi.html" class="dropdown-item">🍼 Pemberian Asi</a>
-                    <a href="Kebersihan_dan_mandi_bayi.html" class="dropdown-item">🏥 Kebersihan dan Mandi</a>
-                    <a href="Pola_tidur.html" class="dropdown-item">🍼 Pola Tidur</a>
-                    <a href="Perkembangan_motorik_bayi.html" class="dropdown-item">🏥 Perkembangan Motorik</a>
-                    <a href="imunisasi.html" class="dropdown-item">🏥 Kesehatan dan Imunisasi</a>
-                    <a href="Keamanan_bayi.html" class="dropdown-item">👶 Keamanan Bayi</a>
-                </div>
+            <a href="#">Materi</a>
+            <div class="dropdown">
+                <a href="kehamilan.html" class="dropdown-item">📱 Kehamilan</a>
+                <a href="asi.html" class="dropdown-item">🍼 Pemberian Asi</a>
+                <a href="Kebersihan_dan_mandi_bayi.html" class="dropdown-item">🧼 Kebersihan dan Mandi</a>
+                <a href="Pola_tidur.html" class="dropdown-item">🌙 Pola Tidur</a>
+                <a href="Perkembangan_motorik_bayi.html" class="dropdown-item">👣 Perkembangan Motorik</a>
+                <a href="imunisasi.html" class="dropdown-item">💉 Kesehatan dan Imunisasi</a>
+                <a href="Keamanan_bayi.html" class="dropdown-item">🛡️ Keamanan Bayi</a>
+            </div>
             </li>
-            <li class="nav-item"><a href="about.html" class="active">Tentang Kami</a></li>
         </ul>
-    </nav>
+
+        <!-- ✅ Taruh mobile-nav DI DALAM <nav> -->
+        <ul class="nav-menu mobile-nav" id="navMenu">
+            <li class="has-dropdown-mobile">
+            <a href="#">Materi</a>
+            <ul class="dropdown-mobile">
+                <li><a href="kehamilan.html">📱 Kehamilan</a></li>
+                <li><a href="asi.html">🍼 Pemberian ASI</a></li>
+                <li><a href="Kebersihan_dan_mandi_bayi.html">🧼 Kebersihan & Mandi</a></li>
+                <li><a href="Pola_tidur.html">🌙 Pola Tidur</a></li>
+                <li><a href="Perkembangan_motorik_bayi.html">👣 Motorik</a></li>
+                <li><a href="imunisasi.html">💉 Imunisasi</a></li>
+                <li><a href="Keamanan_bayi.html">🛡️ Keamanan Bayi</a></li>
+        </nav>
 
     <!-- Hero Section -->
     <header class="about-hero">
@@ -502,7 +709,7 @@
 
         <div class="about-hero-content">
             <h1>Tentang BUNAVI</h1>
-            <p>Platform edukasi terpercaya untuk membantu ibu dalam menavigasi perjalanan kehamilan dan tumbuh kembang anak dengan penuh kasih sayang dan pengetahuan yang tepat.</p>
+            <p>Platform edukasi yang hadir sebagai sahabat setia para ibu, membantu menavigasi setiap fase kehamilan hingga tumbuh kembang anak dengan penuh cinta, kepastian, dan informasi yang terpercaya.</p>
         </div>
     </header>
 
@@ -510,11 +717,12 @@
     <div class="content-section">
         <!-- Deskripsi -->
         <div class="section-card">
-            <h2 class="section-title">🌸 Tentang Kami</h2>
+            <h2 class="section-title">Tentang Kami</h2>
             <p class="description-text">
-                BUNAVI (Bunda Navigator) adalah platform digital yang dirancang khusus untuk mendampingi para ibu dalam perjalanan luar biasa mereka sebagai seorang bunda. Kami memahami bahwa menjadi seorang ibu adalah pengalaman yang penuh dengan kebahagiaan, tantangan, dan momen-momen berharga yang tak terlupakan.
+                BUNAVI (Bunda Navigator) adalah teman digital terpercaya yang hadir untuk mendampingi setiap langkah perjalanan seorang ibu, dari masa kehamilan hingga buah hati tumbuh berkembang.
                 <br><br>
-                Dengan menyediakan informasi yang akurat, mudah dipahami, dan dapat diakses kapan saja, BUNAVI berkomitmen untuk menjadi teman setia setiap ibu dalam menghadapi berbagai fase kehidupan, mulai dari kehamilan hingga tumbuh kembang buah hati.
+                Kami memahami bahwa menjadi ibu bukan hanya tentang merawat, tetapi juga tentang belajar, beradaptasi, dan mencintai tanpa batas. Di tengah banyaknya informasi yang bertebaran, BUNAVI hadir sebagai pelita — memberikan panduan yang jelas, akurat, dan sesuai dengan budaya serta kebutuhan ibu di Indonesia.
+                Lewat tampilan yang bersahabat dan isi yang mudah dipahami, BUNAVI ingin menjadi sahabat terbaik ibu, kapan pun dan di mana pun.
             </p>
         </div>
 
@@ -538,30 +746,36 @@
 
         <!-- Tim Developer -->
         <div class="section-card">
-            <h2 class="section-title">👥 Tim Developer</h2>
+            <h2 class="section-title">Tim Developer</h2>
             <div class="team-grid">
                 <div class="team-member">
-                    <div class="member-avatar">👨‍💻</div>
-                    <h3 class="member-name">Tim Development</h3>
-                    <p class="member-role">Full Stack Developer</p>
+                    <div class="member-avatar">
+                         <img src="assets/faris.jpg" alt="Faris Ammar Faishal" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3 class="member-name">Faris Ammar Faishal</h3>
+                    <p class="member-role">Front-End Developer</p>
                     <p class="member-description">
-                        Tim developer yang berdedikasi untuk menciptakan platform yang user-friendly dan informatif bagi para ibu di Indonesia.
+                       Bertanggung jawab dalam membangun tampilan antarmuka aplikasi yang responsif, ramah pengguna, dan optimal di berbagai perangkat. Memastikan pengguna dapat mengakses informasi dengan mudah dan nyaman.
                     </p>
                 </div>
                 <div class="team-member">
-                    <div class="member-avatar">👩‍⚕️</div>
-                    <h3 class="member-name">Tim Konsultan Medis</h3>
-                    <p class="member-role">Medical Advisor</p>
+                    <div class="member-avatar">
+                         <img src="assets/liswan.png" alt="liswan Saifullah" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3 class="member-name">Liswan Saifullah</h3>
+                    <p class="member-role">UI/UX Designer</p>
                     <p class="member-description">
-                        Para ahli di bidang kebidanan dan pediatri yang memastikan keakuratan informasi medis dalam platform ini.
+                        Merancang pengalaman dan antarmuka pengguna yang intuitif serta menarik secara visual. Fokus pada kenyamanan dan kebutuhan pengguna dalam setiap elemen desain.
                     </p>
                 </div>
                 <div class="team-member">
-                    <div class="member-avatar">🎨</div>
-                    <h3 class="member-name">Tim UI/UX</h3>
-                    <p class="member-role">Design & User Experience</p>
+                    <div class="member-avatar">
+                         <img src="assets/iqbal.jpg" alt="Iqbal Khairi Tamimy" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <h3 class="member-name">Iqbal Khairi Tamimy</h3>
+                    <p class="member-role">Quality Assurance & Tester</p>
                     <p class="member-description">
-                        Desainer yang merancang antarmuka yang intuitif dan menyenangkan untuk pengalaman pengguna yang optimal.
+                        Mengawasi kualitas aplikasi melalui pengujian fungsional dan usability. Bertugas mendeteksi dan melaporkan bug serta memastikan setiap fitur berjalan sesuai harapan sebelum dirilis.
                     </p>
                 </div>
             </div>
@@ -584,12 +798,7 @@
                 <div class="thanks-item">
                     <span class="thanks-icon">📚</span>
                     <div class="thanks-title">Sumber Referensi</div>
-                    <p>WHO, IDAI, POGI, dan institusi kesehatan lainnya yang menyediakan panduan medis terpercaya</p>
-                </div>
-                <div class="thanks-item">
-                    <span class="thanks-icon">💻</span>
-                    <div class="thanks-title">Open Source Community</div>
-                    <p>Para developer yang telah berkontribusi pada teknologi dan framework yang kami gunakan</p>
+                    <p>Buku KIA (Kesehatan Ibu dan Anak) yang menjadi acuan utama dalam penyusunan konten medis dan edukatif di platform ini</p>
                 </div>
                 <div class="thanks-item">
                     <span class="thanks-icon">👨‍👩‍👧‍👦</span>
@@ -612,31 +821,31 @@
             </p>
             <div class="contact-grid">
                 <div class="contact-item">
-                    <div class="contact-icon">📧</div>
+                    <div class="contact-icon">
+                    <img src="assets/mail.png" alt="Email"  style="width: 40px; height: 40px;" />
+                    </div>
                     <h3 class="contact-title">Email</h3>
                     <p class="contact-info">
-                        <a href="mailto:info@bunavi.id" class="contact-link">info@bunavi.id</a><br><small>Respon dalam 24 jam</small>
+                        <a href="mailto:bunavi.app@gmail.com" class="contact-link">bunavi.app@gmail.com</a><br><small>Respon dalam 24 jam</small>
                     </p>
                 </div>
+
                 <div class="contact-item">
-                    <div class="contact-icon">📱</div>
-                    <h3 class="contact-title">WhatsApp</h3>
-                    <p class="contact-info">
-                        <a href="https://wa.me/6281234567890" class="contact-link">+62 812-3456-7890</a><br><small>Layanan Senin-Jumat 09:00-17:00</small>
-                    </p>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">🌐</div>
+                    <div class="contact-icon">
+                    <img src="assets/ig.png" alt="Instagram"  style="width: 40px; height: 40px;" />
+                    </div>
                     <h3 class="contact-title">Media Sosial</h3>
                     <p class="contact-info">
-                        <a href="#" class="contact-link">@bunavi.id</a><br><small>Instagram & Facebook</small>
+                        <a href="https://www.instagram.com/bunavi.id/" class="contact-link">@bunavi.id</a><br><small>Instagram</small>
                     </p>
                 </div>
                 <div class="contact-item">
-                    <div class="contact-icon">📍</div>
+                    <div class="contact-icon">
+                    <img src="assets/loc.png" alt="Lokasi"  style="width: 40px; height: 40px;" />
+                    </div>
                     <h3 class="contact-title">Alamat</h3>
                     <p class="contact-info">
-                        Jakarta, Indonesia<br><small>Kantor Virtual - Online Support</small>
+                        Yogyakarta, Indonesia<br><small>Online Support</small>
                     </p>
                 </div>
             </div>
@@ -657,6 +866,21 @@
             document.querySelectorAll('.section-card').forEach(card => {
                 observer.observe(card);
             });
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', function () {
+        navMenu.classList.toggle('active');
+        });
+
+        // ✅ DROPDOWN MOBILE MENU ("Materi")
+        const dropdownToggles = document.querySelectorAll('.has-dropdown-mobile > a');
+        dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            this.parentElement.classList.toggle('active');
+        });
         });
     </script>
 </body>
