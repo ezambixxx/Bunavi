@@ -29,32 +29,38 @@
 
     <!-- Navigasi -->
     <nav class="navbar loading">
-        
-    <a href="index.html" class="back-button-mobile">←</a>
-    <div class="logo">BUNAVI</div>
-    <ul class="nav-links desktop-only">
-        <!-- Beranda -->
-        <li class="nav-item">
-           <a href="index.html" class="active">Beranda</a>
-        </li>
+        <div class="logo">BUNAVI</div>
+        <div class="hamburger" id="hamburger">☰</div>
+        <a href="index.html" class="back-button-mobile">←</a>
 
-        <!-- Materi dengan Dropdown -->
-        <li class="nav-item has-dropdown">
+        <ul class="nav-links desktop-only">
+            <li class="nav-item"><a href="index.html" class="active">Beranda</a></li>
+            <li class="nav-item has-dropdown">
             <a href="#">Materi</a>
             <div class="dropdown">
                 <a href="kehamilan.html" class="dropdown-item">📱 Kehamilan</a>
-                <a href="asi.html" class="dropdown-item">🍼Pemberian Asi</a>
-                <a href="Kebersihan_dan_mandi_bayi.html" class="dropdown-item">🏥 Kebersihan dan Mandi</a>
-                <a href="Pola_tidur.html" class="dropdown-item">🍼 Pola Tidur</a>
-                <a href="Perkembangan_motorik_bayi.html" class="dropdown-item">🏥 Perkembangan Motorik</a>
-                <a href="imunisasi.html" class="dropdown-item">🏥 Kesehatan dan Imunisasi</a>
-                <a href="Keamanan_bayi.html" class="dropdown-item">👶 Keamanan Bayi</a>
+                <a href="asi.html" class="dropdown-item">🍼 Pemberian Asi</a>
+                <a href="Kebersihan_dan_mandi_bayi.html" class="dropdown-item">🧼 Kebersihan dan Mandi</a>
+                <a href="Pola_tidur.html" class="dropdown-item">🌙 Pola Tidur</a>
+                <a href="Perkembangan_motorik_bayi.html" class="dropdown-item">👣 Perkembangan Motorik</a>
+                <a href="imunisasi.html" class="dropdown-item">💉 Kesehatan dan Imunisasi</a>
+                <a href="Keamanan_bayi.html" class="dropdown-item">🛡️ Keamanan Bayi</a>
             </div>
-        </li>
-    </ul>
-    </nav>
+            </li>
+        </ul>
 
-
+        <!-- ✅ Taruh mobile-nav DI DALAM <nav> -->
+        <ul class="nav-menu mobile-nav" id="navMenu">
+            <li class="has-dropdown-mobile">
+            <a href="#">Materi</a>
+            <ul class="dropdown-mobile">
+                <li><a href="asi.html">🍼 Pemberian ASI</a></li>
+                <li><a href="Kebersihan_dan_mandi_bayi.html">🧼 Kebersihan & Mandi</a></li>
+                <li><a href="Pola_tidur.html">🌙 Pola Tidur</a></li>
+                <li><a href="Perkembangan_motorik_bayi.html">👣 Motorik</a></li>
+                <li><a href="imunisasi.html">💉 Imunisasi</a></li>
+                <li><a href="Keamanan_bayi.html">🛡️ Keamanan Bayi</a></li>
+        </nav>
 
     <div class="container">
         <!-- Header -->
@@ -380,6 +386,8 @@
         padding: 20px;
     }
 }
+
+
 </style>
 
 </body>
@@ -686,6 +694,22 @@ function restartQuiz() {
 
 // Load pertanyaan pertama saat halaman dibuka
 document.addEventListener("DOMContentLoaded", loadQuestion);
+
+const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', function () {
+      navMenu.classList.toggle('active');
+    });
+
+    // ✅ DROPDOWN MOBILE MENU ("Materi")
+    const dropdownToggles = document.querySelectorAll('.has-dropdown-mobile > a');
+    dropdownToggles.forEach(toggle => {
+      toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        this.parentElement.classList.toggle('active');
+      });
+    });
+
 </script>
 
 </html>
