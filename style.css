@@ -968,6 +968,9 @@
         .quiz-question {
             display: none;
             text-align: center;
+            display: block !important;
+            color: black !important;
+            font-weight: bold;
         }
         
         .quiz-question.active {
