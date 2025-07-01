@@ -25,10 +25,10 @@
         </div>
 
         <div class="content-tabs">
-            <button class="tab-btn active" onclick="showTab('manfaat')">Manfaat ASI</button>
-            <button class="tab-btn" onclick="showTab('panduan')">Panduan Menyusui</button>
-            <button class="tab-btn" onclick="showTab('perbandingan')">ASI vs Sufor</button>
-            <button class="tab-btn" onclick="showTab('mitos')">Mitos & Fakta</button>
+            <button class="tab-btn active" onclick="showTab('manfaat', event)">Manfaat ASI</button>
+            <button class="tab-btn" onclick="showTab('panduan', event)">Panduan Menyusui</button>
+            <button class="tab-btn" onclick="showTab('perbandingan', event)">ASI vs Sufor</button>
+            <button class="tab-btn" onclick="showTab('mitos', event)">Mitos & Fakta</button>
         </div>
 
         <!-- Tab Manfaat ASI -->
@@ -256,7 +256,7 @@
     <script>
         let panduanSteps = [false, false, false, false];
         
-        function showTab(tabName) {
+        function showTab(tabName, event) {
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
