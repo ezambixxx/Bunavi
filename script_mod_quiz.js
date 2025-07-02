@@ -469,9 +469,12 @@ window.closeTopicModal = function() {
 // PROGRESS MANAGEMENT
 // ===============================
 function updateTopicProgress(topicKey, percentage) {
-    // Menggunakan variabel global instead of localStorage untuk kompatibilitas
     if (!window.topicProgress) window.topicProgress = {};
     window.topicProgress[topicKey] = percentage;
+
+    // Simpan ke localStorage
+    localStorage.setItem("topicProgress", JSON.stringify(window.topicProgress));
+
     updateProgressUI();
 }
 
@@ -505,6 +508,12 @@ function updateProgressUI() {
 // INISIALISASI SCRIPT
 // ===============================
 document.addEventListener('DOMContentLoaded', function () {
+    // ✅ Load progress dari localStorage
+    const savedProgress = localStorage.getItem("topicProgress");
+    if (savedProgress) {
+        window.topicProgress = JSON.parse(savedProgress);
+    }
+
     // Inisialisasi semua fungsi
     animateOnScroll();
     updateProgressUI();
